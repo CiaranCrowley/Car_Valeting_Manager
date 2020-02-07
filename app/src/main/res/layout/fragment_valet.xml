@@ -63,21 +63,20 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <Button
-                android:id="@+id/showCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Show Calendar" />
-
-            <CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:id="@+id/btnGoCalendar"
+                android:text="@string/go_to_calendar"/>
 
             <TextView
-                android:id="@+id/showDate"
+                android:id="@+id/date"
+                android:layout_marginHorizontal="30dp"
+                android:textSize="25sp"
+                android:layout_marginTop="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date" />
+                android:hint="Date"/>
+
 
             <TextView
                 android:id="@+id/donateSubtitle"
@@ -156,7 +155,6 @@
                 style="@android:style/Widget.Material.NumberPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/donateSubtitle"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"

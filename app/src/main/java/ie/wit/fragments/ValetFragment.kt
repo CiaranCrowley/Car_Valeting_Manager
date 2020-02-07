@@ -1,5 +1,6 @@
 package ie.wit.fragments
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,13 @@ import ie.wit.models.ValetModel
 import kotlinx.android.synthetic.main.fragment_valet.*
 import kotlinx.android.synthetic.main.fragment_valet.view.*
 import org.jetbrains.anko.toast
+import java.util.*
 
 class ValetFragment : Fragment() {
 
     lateinit var app: ValetApp
     var totalDonated = 0
+    var todaysDate = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,19 +62,12 @@ class ValetFragment : Fragment() {
         }
         setButtonListener(root)
 
-        root.showCalendar.setOnClickListener{
-            calendarView
-        }
-
         /*showCalendar.setOnClickListener{
             calendarView
         }*/
 
         return root
     }
-
-
-    //https://www.youtube.com/watch?v=hHjFIG0TtA0&feature=youtu.be
 
     companion object {
         @JvmStatic
@@ -82,6 +78,7 @@ class ValetFragment : Fragment() {
     }
 
     fun setButtonListener( layout: View) {
+
         layout.donateButton.setOnClickListener {
             val amount = if (layout.paymentAmount.text.isNotEmpty())
                 layout.paymentAmount.text.toString().toInt() else layout.amountPicker.value
@@ -95,6 +92,21 @@ class ValetFragment : Fragment() {
                 app.valetStore.create(ValetModel(paymentmethod = paymentmethod,amount = amount))
             }
         }
+
+        //https://www.youtube.com/watch?v=LMPmybCTKDA
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        layout.btnGoCalendar.setOnClickListener{
+            val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener{view, mYear, mMonth, mDay -> //for activity!! (https://stackoverflow.com/questions/53213990/type-mismatch-inferred-type-is-fragmentactivity-but-context-was-expected)
+                date.text = "" + mDay + "/" + mMonth + "/" + mYear
+               /* val day = date.toString()
+                app.valetStore.create(ValetModel(date = day))*/
+            }, year, month, day)
+            dpd.show()
+        }
     }
 
     override fun onResume() {
@@ -102,5 +114,9 @@ class ValetFragment : Fragment() {
         totalDonated = app.valetStore.findAll().sumBy { it.amount }
         progressBar.progress = totalDonated
         totalSoFar.text = "$$totalDonated"
+
+        //todaysDate = app.valetStore.findDate().toString()
+        //date.setText(todaysDate)
+
     }
 }

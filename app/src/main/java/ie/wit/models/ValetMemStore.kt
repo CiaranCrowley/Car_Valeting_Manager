@@ -10,25 +10,25 @@ internal fun getId(): Long {
 
 class ValetMemStore : ValetStore {
 
-    val donations = ArrayList<ValetModel>()
+    val valets = ArrayList<ValetModel>()
 
     override fun findAll(): List<ValetModel> {
-        return donations
+        return valets
     }
 
     override fun findById(id:Long) : ValetModel? {
-        val foundDonation: ValetModel? = donations.find { it.id == id }
+        val foundDonation: ValetModel? = valets.find { it.id == id }
         return foundDonation
     }
 
-    override fun create(donation: ValetModel) {
-        donation.id = getId()
-        donations.add(donation)
+    override fun create(valet: ValetModel) {
+        valet.id = getId()
+        valets.add(valet)
         logAll()
     }
 
     fun logAll() {
         Log.v("Donate","** Donations List **")
-        donations.forEach { Log.v("Donate","${it}") }
+        valets.forEach { Log.v("Donate","${it}") }
     }
 }
