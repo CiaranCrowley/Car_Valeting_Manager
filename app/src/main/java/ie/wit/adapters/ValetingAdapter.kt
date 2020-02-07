@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ie.wit.car_valeting_manager.R
+import ie.wit.R
 import ie.wit.models.ValetModel
 import kotlinx.android.synthetic.main.card_valet.view.*
 

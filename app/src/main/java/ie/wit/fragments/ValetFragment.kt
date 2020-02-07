@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ie.wit.car_valeting_manager.R
+import ie.wit.R
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
 import kotlinx.android.synthetic.main.fragment_valet.*

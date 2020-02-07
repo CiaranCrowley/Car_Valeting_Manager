@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import ie.wit.car_valeting_manager.R
+import ie.wit.R
+//import ie.wit.car_valeting_manager.R
 import ie.wit.fragments.ValetFragment
+import ie.wit.fragments.ValetSavedFragment
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.home.*
 import org.jetbrains.anko.toast
@@ -62,7 +64,7 @@ class Home : AppCompatActivity(),
 
         when (item.itemId) {
             R.id.nav_donate -> navigateTo(ValetFragment.newInstance())
-            //R.id.nav_report -> navigateTo(ReportFragment.newInstance())
+            R.id.nav_report -> navigateTo(ValetSavedFragment.newInstance())
 
             else -> toast("You Selected Something Else")
         }
