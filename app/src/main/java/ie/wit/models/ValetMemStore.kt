@@ -17,8 +17,9 @@ class ValetMemStore : ValetStore {
     }
 
     override fun findById(id:Long) : ValetModel? {
-        val foundDonation: ValetModel? = valets.find { it.id == id }
-        return foundDonation
+        //todo: these have to be changed
+        val foundValet: ValetModel? = valets.find { it.id == id }
+        return foundValet
     }
 
     override fun create(valet: ValetModel) {
@@ -28,6 +29,7 @@ class ValetMemStore : ValetStore {
     }
 
     fun logAll() {
+        //todo these have to be changed
         Log.v("Donate","** Donations List **")
         valets.forEach { Log.v("Donate","${it}") }
     }

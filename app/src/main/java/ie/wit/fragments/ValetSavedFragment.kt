@@ -11,16 +11,6 @@ import ie.wit.adapters.ValetingAdapter
 import ie.wit.main.ValetApp
 import kotlinx.android.synthetic.main.fragment_valet_saved.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ReportFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ValetSavedFragment : Fragment() {
 
     lateinit var app: ValetApp
@@ -37,7 +27,7 @@ class ValetSavedFragment : Fragment() {
         // Inflate the layout for this fragment
         var root = inflater.inflate(R.layout.fragment_valet_saved, container, false)
 
-        root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
+        root.recyclerView.layoutManager = LinearLayoutManager(activity)
         root.recyclerView.adapter = ValetingAdapter(app.valetStore.findAll())
 
         return root

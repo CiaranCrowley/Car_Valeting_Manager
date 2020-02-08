@@ -5,6 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ValetModel(var id: Long = 0,
-                      val date: String = "",
+                      var date: String = "N/A",
                       val paymentmethod: String = "N/A",
                       val amount: Int = 0) : Parcelable

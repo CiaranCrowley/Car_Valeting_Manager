@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import ie.wit.R
-//import ie.wit.car_valeting_manager.R
 import ie.wit.fragments.ValetFragment
 import ie.wit.fragments.ValetSavedFragment
 import kotlinx.android.synthetic.main.app_bar_home.*
@@ -28,19 +27,6 @@ class Home : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
         setSupportActionBar(toolbar)
-
-/*//        val calendarView = findViewById<CalendarView>(R.id.calendarView)
-//        calendarView?.setOnDateChangeListener { view, year, month, dayOfMonth ->
-//            // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
-//            val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
-//            Toast.makeText(this@Home, msg, Toast.LENGTH_SHORT).show()
-//        }*/
-
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action",
-                Snackbar.LENGTH_LONG).setAction("Action", null).show()
-        }
 
         navView.setNavigationItemSelectedListener(this)
 
@@ -63,6 +49,7 @@ class Home : AppCompatActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+            //todo Change the donate  nav_donate & nav_report is in activity_home_drawer.xml
             R.id.nav_donate -> navigateTo(ValetFragment.newInstance())
             R.id.nav_report -> navigateTo(ValetSavedFragment.newInstance())
 
@@ -80,6 +67,7 @@ class Home : AppCompatActivity(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+            //todo change the donate these are in home_menu.xml
             R.id.action_donate -> toast("You Selected Donate")
             R.id.action_report -> toast("You Selected Report")
         }

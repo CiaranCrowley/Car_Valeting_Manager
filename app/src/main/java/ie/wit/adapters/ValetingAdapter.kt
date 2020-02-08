@@ -8,7 +8,7 @@ import ie.wit.R
 import ie.wit.models.ValetModel
 import kotlinx.android.synthetic.main.card_valet.view.*
 
-class ValetingAdapter constructor(private var donations: List<ValetModel>)
+class ValetingAdapter constructor(private var valets: List<ValetModel>)
     : RecyclerView.Adapter<ValetingAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -22,17 +22,16 @@ class ValetingAdapter constructor(private var donations: List<ValetModel>)
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val valet = donations[holder.adapterPosition]
+        val valet = valets[holder.adapterPosition]
         holder.bind(valet)
     }
 
-    override fun getItemCount(): Int = donations.size
+    override fun getItemCount(): Int = valets.size
 
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(donation: ValetModel) {
-            itemView.paymentamount.text = donation.amount.toString()
-            itemView.paymentmethod.text = donation.paymentmethod
+        fun bind(valet: ValetModel) {
+            itemView.dateShown.text = valet.date
             itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
         }
     }

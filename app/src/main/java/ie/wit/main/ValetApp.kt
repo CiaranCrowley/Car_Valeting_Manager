@@ -12,6 +12,6 @@ class ValetApp : Application() {
     override fun onCreate() {
         super.onCreate()
         valetStore = ValetMemStore()
-        Log.v("Donate","Donation App started")
+        Log.v("Valet","Valet App started")
     }
 }

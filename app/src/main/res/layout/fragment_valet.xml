@@ -29,199 +29,42 @@
     android:text="Date"/>-->
 
 
-    <ScrollView
-        android:layout_width="385dp"
-        android:layout_height="681dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+    <TextView
+        android:id="@+id/addNewAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="33dp"
+        android:text="@string/addNewAppointment"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.50">
+        tools:layout_editor_absoluteX="24dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <Button
+        android:id="@+id/btnGoCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/go_to_calendar"
+        android:background="@color/btnColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addNewAppointment" />
 
-            <TextView
-                android:id="@+id/addNewAppointment"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/addNewAppointment"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnGoCalendar"
-                android:text="@string/go_to_calendar"/>
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_marginHorizontal="30dp"
-                android:textSize="25sp"
-                android:layout_marginTop="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Date"/>
-
-
-            <TextView
-                android:id="@+id/donateSubtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/donateTitle"
-                android:layout_alignEnd="@+id/donateTitle"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/donateSubtitle"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.044"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.114" />
-
-            <Button
-                android:id="@+id/donateButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/donateButton"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.028"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.948" />
-
-            <RadioGroup
-                android:id="@+id/paymentMethod"
-                android:layout_width="181dp"
-                android:layout_height="128dp"
-                android:layout_above="@+id/progressBar"
-                android:layout_below="@+id/donateSubtitle"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:layout_toStartOf="@+id/amountPicker"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.042"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/donateTitle"
-                app:layout_constraintVertical_bias="0.276">
-
-                <RadioButton
-                    android:id="@+id/PayPal"
-                    android:layout_width="97dp"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/paypal" />
-
-                <RadioButton
-                    android:id="@+id/Direct"
-                    android:layout_width="97dp"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="@string/direct" />
-            </RadioGroup>
-
-            <NumberPicker
-                android:id="@+id/amountPicker"
-                style="@android:style/Widget.Material.NumberPicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.973"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.333" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="349dp"
-                android:layout_height="14dp"
-                android:layout_above="@+id/donateButton"
-                android:layout_alignEnd="@+id/donateSubtitle"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:indeterminate="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.526"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.7" />
-
-            <TextView
-                android:id="@+id/totalSoFar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/totalSoFar"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.846"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.902" />
-
-            <EditText                android:id="@+id/paymentAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:autofillHints="Please Enter an Amount"
-                android:ems="10"
-                android:hint="@string/enter_amount"
-                android:inputType="number"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.888"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.781" />
-
-        </LinearLayout>
-    </ScrollView>
+    <TextView
+        android:id="@+id/showDate"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="140dp"
+        android:hint="Date"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
