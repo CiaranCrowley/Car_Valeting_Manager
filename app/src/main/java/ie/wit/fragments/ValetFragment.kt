@@ -55,7 +55,7 @@ class ValetFragment : Fragment() {
                 cal.set(Calendar.MONTH, month)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-                val format = "dd.MM.yyy"
+                val format = "dd/MM/yyy"
                 val sdf = SimpleDateFormat(format, Locale.UK)
                 showDate.text = sdf.format(cal.time)
                 val date : String = showDate.text.toString()

@@ -1,6 +1,7 @@
 <resources>
+    <!--todo: most of these have to be changed-->
     <string name="app_name">Car_Valeting_Management</string>
-    <string name="action_donate">Donate</string>
+    <string name="action_donate">Valet</string>
     <string name="action_report">Report</string>
     <string name="addNewAppointment">Create a new entry here</string>
     <string name="donateSubtitle">Please Give Generously</string>
@@ -18,21 +19,22 @@
     <string name="title_activity_home">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!--todo: these are used in  -->
     <string name="nav_header_title">Donation (Lab K07a)</string>
     <string name="nav_header_subtitle">voteforhomer@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="menu_donate">Donate</string>
+    <!--todo: change names in here  (many of these can be found in activity_home_drawer.xml-->
+    <string name="menu_donate">Valet</string>
     <string name="menu_report">Report</string>
     <string name="menu_favourites">Favourites</string>
     <string name="menu_about">About Us</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
-    <string name="go_to_calendar">Go To Calendar</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="textview">TextView</string>
+    <string name="carBrand">Car Brand Name (e.g. Ford)</string>
+    <string name="carModel">Car Model (e.g. Fiesta)</string>
+    <string name="go_to_calendar">Enter a Date</string>
+    <string name="dateShown">Date</string>
+    <string name="date">Date</string>
+    <string name="numberPlate">Number Plate</string>
 </resources>
