@@ -31,8 +31,10 @@ class ValetingAdapter constructor(private var valets: List<ValetModel>)
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(valet: ValetModel) {
+            itemView.carBrandReport.text = valet.carBrand
+            itemView.carModelReport.text = valet.carModel
             itemView.dateShown.text = valet.date
-            itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+            itemView.serviceType.text = valet.serviceType
         }
     }
 }

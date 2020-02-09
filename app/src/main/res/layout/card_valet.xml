@@ -13,38 +13,50 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/imageIcon"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="16dp"
-            app:srcCompat="@mipmap/ic_launcher_round" />
-
         <TextView
-            android:id="@+id/dateShown"
-            android:layout_width="300dp"
+            android:id="@+id/carBrandReport"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/imageIcon"
-            android:text="@string/dateShown"
-            android:textColor="#000000"
-            android:textSize="24sp" />
+            android:text="Brand"
+            android:textSize="14sp" />
 
-        <!--<TextView
-            android:id="@+id/paymentmethod"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/carModelReport"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/date"
-            android:text="@string/paypal"
+            android:layout_toEndOf="@id/carBrandReport"
+            android:text="Model"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/dateShown"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@id/carModelReport"
+            android:text="Date"
             android:textColor="#000000"
-            android:textSize="24sp" />-->
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/serviceType"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/dateShown"
+            android:text=""
+            android:textColor="#000000"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

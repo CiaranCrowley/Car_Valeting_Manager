@@ -9,7 +9,6 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import ie.wit.R
 import ie.wit.fragments.ValetFragment
 import ie.wit.fragments.ValetSavedFragment

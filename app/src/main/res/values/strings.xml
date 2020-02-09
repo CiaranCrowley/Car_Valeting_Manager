@@ -24,8 +24,8 @@
     <string name="nav_header_subtitle">voteforhomer@android.com</string>
 
     <!--todo: change names in here  (many of these can be found in activity_home_drawer.xml-->
-    <string name="menu_donate">Valet</string>
-    <string name="menu_report">Report</string>
+    <string name="menu_donate">Add New Car</string>
+    <string name="menu_report">Booked Cars</string>
     <string name="menu_favourites">Favourites</string>
     <string name="menu_about">About Us</string>
     <string name="menu_share">Share</string>
@@ -37,4 +37,7 @@
     <string name="dateShown">Date</string>
     <string name="date">Date</string>
     <string name="numberPlate">Number Plate</string>
+    <string name="standardService">Standard Service</string>
+    <string name="premiumService">Premium Service</string>
+    <string name="addNewCar">Book this Car</string>
 </resources>

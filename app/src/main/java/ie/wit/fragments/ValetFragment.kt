@@ -2,10 +2,9 @@ package ie.wit.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import ie.wit.R
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
@@ -14,13 +13,16 @@ import kotlinx.android.synthetic.main.fragment_valet.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class ValetFragment : Fragment() {
 
     lateinit var app: ValetApp
+    lateinit var ft: FragmentTransaction
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as ValetApp
+
     }
 
     override fun onCreateView(
@@ -58,8 +60,6 @@ class ValetFragment : Fragment() {
                 val format = "dd/MM/yyy"
                 val sdf = SimpleDateFormat(format, Locale.UK)
                 showDate.text = sdf.format(cal.time)
-                val date : String = showDate.text.toString()
-                app.valetStore.create(ValetModel(date = date))
             }
 
             DatePickerDialog(activity!!, dateSetListener,
@@ -67,8 +67,27 @@ class ValetFragment : Fragment() {
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)).show()
         }
-    }
 
+        layout.btnAddCar.setOnClickListener{
+            val brand : String = carBrand.text.toString()
+            val model : String = carModel.text.toString()
+            val regNo : String = numberPlate.text.toString()
+            val service = if(layout.serviceType.checkedRadioButtonId == R.id.standardService){
+                "Premium Service"
+            }else "Standard Service"
+            val date : String = showDate.text.toString()
+            app.valetStore.create(ValetModel(carBrand = brand,carModel = model,
+                numberPlate = regNo,
+                serviceType = service,
+                date = date
+            ))
+
+            /*ft = supportFragmentManager.beginTransaction()
+            val fragment = ValetSavedFragment.newInstance()
+            ft.replace(R.id.homeFrame, fragment)
+            ft.commit()*/
+        }
+    }
 
     override fun onResume() {
         super.onResume()

@@ -16,12 +16,6 @@ class ValetMemStore : ValetStore {
         return valets
     }
 
-    override fun findById(id:Long) : ValetModel? {
-        //todo: these have to be changed
-        val foundValet: ValetModel? = valets.find { it.id == id }
-        return foundValet
-    }
-
     override fun create(valet: ValetModel) {
         valet.id = getId()
         valets.add(valet)
