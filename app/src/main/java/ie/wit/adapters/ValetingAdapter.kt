@@ -8,7 +8,12 @@ import ie.wit.R
 import ie.wit.models.ValetModel
 import kotlinx.android.synthetic.main.card_valet.view.*
 
-class ValetingAdapter constructor(private var valets: List<ValetModel>)
+interface ValetListener{
+    fun onValetClick(valet: ValetModel)
+}
+
+class ValetingAdapter constructor(private var valets: List<ValetModel>,
+                                  private val listener: ValetListener)
     : RecyclerView.Adapter<ValetingAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -23,18 +28,19 @@ class ValetingAdapter constructor(private var valets: List<ValetModel>)
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val valet = valets[holder.adapterPosition]
-        holder.bind(valet)
+        holder.bind(valet, listener)
     }
 
     override fun getItemCount(): Int = valets.size
 
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(valet: ValetModel) {
+        fun bind(valet: ValetModel, listener: ValetListener) {
             itemView.carBrandReport.text = valet.carBrand
             itemView.carModelReport.text = valet.carModel
             itemView.dateShown.text = valet.date
             itemView.serviceType.text = valet.serviceType
+            itemView.setOnClickListener{listener.onValetClick(valet)}
         }
     }
 }

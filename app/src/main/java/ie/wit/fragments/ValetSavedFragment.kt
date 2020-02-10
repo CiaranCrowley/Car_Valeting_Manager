@@ -7,13 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.R
+import ie.wit.adapters.ValetListener
 import ie.wit.adapters.ValetingAdapter
 import ie.wit.main.ValetApp
+import ie.wit.models.ValetModel
 import kotlinx.android.synthetic.main.fragment_valet_saved.view.*
+import org.jetbrains.anko.support.v4.intentFor
 
-class ValetSavedFragment : Fragment() {
+
+class ValetSavedFragment : Fragment(), ValetListener {
 
     lateinit var app: ValetApp
+    /*lateinit var fm: FragmentManager
+    lateinit var ft: FragmentTransaction*/
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +35,16 @@ class ValetSavedFragment : Fragment() {
         var root = inflater.inflate(R.layout.fragment_valet_saved, container, false)
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
-        root.recyclerView.adapter = ValetingAdapter(app.valetStore.findAll())
+        root.recyclerView.adapter = ValetingAdapter(app.valetStore.findAll(), this)
 
         return root
     }
+
+    /*override fun onValetClicked(valet : ValetModel){
+        report_layout.setOnClickListener{
+            startActivityForResult()
+        }
+    }*/
 
     companion object {
         @JvmStatic
@@ -39,6 +52,11 @@ class ValetSavedFragment : Fragment() {
             ValetSavedFragment().apply {
                 arguments = Bundle().apply { }
             }
+    }
+
+    override fun onValetClick(valet: ValetModel) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        startActivityForResult(intentFor<ValetFragment>().putExtra("reminder_edit", valet), 0)
     }
 }
 
