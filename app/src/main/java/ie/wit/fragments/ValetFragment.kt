@@ -72,9 +72,7 @@ class ValetFragment : Fragment() {
             val brand : String = carBrand.text.toString()
             val model : String = carModel.text.toString()
             val regNo : String = numberPlate.text.toString()
-            val service = if(layout.serviceType.checkedRadioButtonId == R.id.standardService){
-                "Premium Service"
-            }else "Standard Service"
+            val service = if(layout.serviceType.checkedRadioButtonId == R.id.premiumService) "Premium Service" else "Standard Service"
             val date : String = showDate.text.toString()
             app.valetStore.create(ValetModel(carBrand = brand,carModel = model,
                 numberPlate = regNo,

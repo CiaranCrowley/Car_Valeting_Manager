@@ -55,7 +55,6 @@ class ValetSavedFragment : Fragment(), ValetListener {
     }
 
     override fun onValetClick(valet: ValetModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         startActivityForResult(intentFor<ValetFragment>().putExtra("reminder_edit", valet), 0)
     }
 }
