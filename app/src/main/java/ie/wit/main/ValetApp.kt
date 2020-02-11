@@ -1,17 +1,17 @@
 package ie.wit.main
 
 import android.app.Application
-import android.util.Log
 import ie.wit.models.ValetMemStore
 import ie.wit.models.ValetStore
 
 class ValetApp : Application() {
 
-    lateinit var valetStore: ValetStore
+    //lateinit var valet: ValetStore
+    val valet = ValetMemStore()
 
     override fun onCreate() {
         super.onCreate()
-        valetStore = ValetMemStore()
-        Log.v("Valet","Valet App started")
+        //valet = ValetMemStore()
+        //Log.v("Valet","Valet App started")
     }
 }

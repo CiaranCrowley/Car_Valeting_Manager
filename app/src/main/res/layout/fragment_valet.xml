@@ -97,7 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/btnGoCalendar" />
 
-    <RadioGroup
+    <!--<RadioGroup
         android:id="@+id/serviceType"
         android:layout_width="150dp"
         android:layout_height="80dp"
@@ -117,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/premiumService" />
-    </RadioGroup>
+    </RadioGroup>-->
 
     <Button
         android:id="@+id/btnAddCar"

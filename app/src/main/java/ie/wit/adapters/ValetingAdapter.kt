@@ -39,7 +39,9 @@ class ValetingAdapter constructor(private var valets: List<ValetModel>,
             itemView.carBrandReport.text = valet.carBrand
             itemView.carModelReport.text = valet.carModel
             itemView.dateShown.text = valet.date
+/*
             itemView.serviceType.text = valet.serviceType
+*/
             itemView.setOnClickListener{listener.onValetClick(valet)}
         }
     }

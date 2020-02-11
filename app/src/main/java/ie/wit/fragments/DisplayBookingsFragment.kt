@@ -19,8 +19,6 @@ import org.jetbrains.anko.support.v4.intentFor
 class DisplayBookingsFragment : Fragment(), ValetListener {
 
     lateinit var app: ValetApp
-    /*lateinit var fm: FragmentManager
-    lateinit var ft: FragmentTransaction*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,16 +34,10 @@ class DisplayBookingsFragment : Fragment(), ValetListener {
         var root = inflater.inflate(R.layout.fragment_valet_saved, container, false)
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
-        root.recyclerView.adapter = ValetingAdapter(app.valetStore.findAll(), this)
+        root.recyclerView.adapter = ValetingAdapter(app.valet.findAll(), this)
 
         return root
     }
-
-    /*override fun onValetClicked(valet : ValetModel){
-        report_layout.setOnClickListener{
-            startActivityForResult()
-        }
-    }*/
 
     companion object {
         @JvmStatic

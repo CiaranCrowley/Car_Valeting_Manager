@@ -28,7 +28,9 @@ class ValetMemStore : ValetStore, AnkoLogger {
             foundBooking.carBrand = valet.carBrand
             foundBooking.carModel = valet.carModel
             foundBooking.numberPlate = valet.numberPlate
+/*
             foundBooking.serviceType = valet.serviceType
+*/
             foundBooking.date = valet.date
             logAll()
         }
