@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.wit.R
+import ie.wit.activities.BookingActivity
 import ie.wit.adapters.ValetListener
 import ie.wit.adapters.ValetingAdapter
 import ie.wit.main.ValetApp
@@ -55,7 +56,7 @@ class DisplayBookingsFragment : Fragment(), ValetListener {
     }
 
     override fun onValetClick(valet: ValetModel) {
-        startActivityForResult(intentFor<BookingFragment>().putExtra("reminder_edit", valet), 0)
+        startActivityForResult(intentFor<BookingActivity>().putExtra("reminder_edit", valet), 0)
     }
 }
 

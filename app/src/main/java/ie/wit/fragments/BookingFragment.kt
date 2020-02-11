@@ -16,17 +16,12 @@ import java.util.*
 class BookingFragment : Fragment() {
 
     lateinit var app: ValetApp
-    /*var edit = false
-    var valet = ValetModel()*/
+    var edit = false
+    var valet = ValetModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as ValetApp
-
-        /*if(intent.hasExtra("valet_edit")){
-            edit = true
-            valet = intent.extras.getParcelable<ValetModel>("valet_edit")
-        }*/
     }
 
     override fun onCreateView(
@@ -35,7 +30,7 @@ class BookingFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_valet, container, false)
-        activity?.title = getString(R.string.action_donate)
+        //activity?.title = getString(R.string.action_donate)
 
         setButtonListener(root)
 
