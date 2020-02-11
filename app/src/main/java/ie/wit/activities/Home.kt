@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
 import ie.wit.R
-import ie.wit.fragments.ValetFragment
-import ie.wit.fragments.ValetSavedFragment
+import ie.wit.fragments.BookingFragment
+import ie.wit.fragments.DisplayBookingsFragment
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.home.*
 import org.jetbrains.anko.toast
@@ -39,7 +39,7 @@ class Home : AppCompatActivity(),
 
         ft = supportFragmentManager.beginTransaction()
 
-        val fragment = ValetFragment.newInstance()
+        val fragment = DisplayBookingsFragment.newInstance()
         ft.replace(R.id.homeFrame, fragment)
         ft.commit()
     }
@@ -49,8 +49,8 @@ class Home : AppCompatActivity(),
 
         when (item.itemId) {
             //todo Change the donate  nav_donate & nav_report is in activity_home_drawer.xml
-            R.id.nav_donate -> navigateTo(ValetFragment.newInstance())
-            R.id.nav_report -> navigateTo(ValetSavedFragment.newInstance())
+            R.id.nav_donate -> navigateTo(BookingFragment.newInstance())
+            R.id.nav_report -> navigateTo(DisplayBookingsFragment.newInstance())
 
             else -> toast("You Selected Something Else")
         }
@@ -80,7 +80,7 @@ class Home : AppCompatActivity(),
             super.onBackPressed()
     }
 
-    private fun navigateTo(fragment: Fragment) {
+    public fun navigateTo(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.homeFrame, fragment)
             .addToBackStack(null)

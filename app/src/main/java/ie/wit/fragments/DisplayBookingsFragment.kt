@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_valet_saved.view.*
 import org.jetbrains.anko.support.v4.intentFor
 
 
-class ValetSavedFragment : Fragment(), ValetListener {
+class DisplayBookingsFragment : Fragment(), ValetListener {
 
     lateinit var app: ValetApp
     /*lateinit var fm: FragmentManager
@@ -49,13 +49,13 @@ class ValetSavedFragment : Fragment(), ValetListener {
     companion object {
         @JvmStatic
         fun newInstance() =
-            ValetSavedFragment().apply {
+            DisplayBookingsFragment().apply {
                 arguments = Bundle().apply { }
             }
     }
 
     override fun onValetClick(valet: ValetModel) {
-        startActivityForResult(intentFor<ValetFragment>().putExtra("reminder_edit", valet), 0)
+        startActivityForResult(intentFor<BookingFragment>().putExtra("reminder_edit", valet), 0)
     }
 }
 

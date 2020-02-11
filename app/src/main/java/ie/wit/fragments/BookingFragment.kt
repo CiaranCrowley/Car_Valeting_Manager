@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import ie.wit.R
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
@@ -14,15 +13,20 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ValetFragment : Fragment() {
+class BookingFragment : Fragment() {
 
     lateinit var app: ValetApp
-    lateinit var ft: FragmentTransaction
+    /*var edit = false
+    var valet = ValetModel()*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as ValetApp
 
+        /*if(intent.hasExtra("valet_edit")){
+            edit = true
+            valet = intent.extras.getParcelable<ValetModel>("valet_edit")
+        }*/
     }
 
     override fun onCreateView(
@@ -41,7 +45,7 @@ class ValetFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            ValetFragment().apply {
+            BookingFragment().apply {
                 arguments = Bundle().apply {}
             }
     }
