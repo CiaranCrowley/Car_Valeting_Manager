@@ -43,19 +43,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="15dp"
             android:layout_toEndOf="@id/carModelReport"
-            android:text="Date"
-            android:textColor="#000000"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/serviceType"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/dateShown"
-            android:text=""
+            android:hint="Date"
             android:textColor="#000000"
             android:textSize="14sp" />
 

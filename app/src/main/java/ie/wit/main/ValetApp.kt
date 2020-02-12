@@ -7,11 +7,11 @@ import ie.wit.models.ValetStore
 class ValetApp : Application() {
 
     //lateinit var valet: ValetStore
-    val valet = ValetMemStore()
+    val valets = ValetMemStore()
 
     override fun onCreate() {
         super.onCreate()
-        //valet = ValetMemStore()
+        //valets = ValetMemStore()
         //Log.v("Valet","Valet App started")
     }
 }

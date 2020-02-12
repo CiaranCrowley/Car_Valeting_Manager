@@ -5,22 +5,10 @@
     <string name="action_report">Report</string>
     <string name="addNewAppointment">Create a new entry here</string>
 
-    <string name="title_activity_home">Home</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <!--todo: these are used in  -->
-    <string name="nav_header_title">Valet Service Management</string>
-    <string name="nav_header_subtitle">voteforhomer@android.com</string>
-
-    <!--todo: change names in here  (many of these can be found in activity_home_drawer.xml-->
-    <string name="menu_donate">Add New Car</string>
+    <string name="menu_addCar">Add New Car</string>
     <string name="menu_report">Booked Cars</string>
-    <!--todo these can be used later-->
-    <string name="menu_favourites">Favourites</string>
-    <string name="menu_about">About Us</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_deleteBooking">Delete</string>
+    <string name="menu_cancelBooking">Cancel Us</string>\
 
     <string name="carBrand">Car Brand Name (e.g. Ford)</string>
     <string name="carModel">Car Model (e.g. Fiesta)</string>

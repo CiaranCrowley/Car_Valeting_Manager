@@ -3,97 +3,94 @@ package ie.wit.activities
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.navigation.NavigationView
 import ie.wit.R
-import ie.wit.fragments.BookingFragment
-import ie.wit.fragments.DisplayBookingsFragment
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
-import kotlinx.android.synthetic.main.app_bar_home.*
-import kotlinx.android.synthetic.main.fragment_valet.*
-import kotlinx.android.synthetic.main.home.*
+import kotlinx.android.synthetic.main.activity_booking.*
+import kotlinx.android.synthetic.main.card_valet.*
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BookingActivity : AppCompatActivity(),
-    NavigationView.OnNavigationItemSelectedListener  {
+class BookingActivity : AppCompatActivity() {
 
     var valet = ValetModel()
     var edit = false
-    //lateinit var app : ValetApp
-    lateinit var ft: FragmentTransaction
+    lateinit var app : ValetApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.home)
-        //app = application as ValetApp
+        setContentView(R.layout.activity_booking)
+        app = application as ValetApp
 
-        navView.setNavigationItemSelectedListener(this)
-
-        val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
-        )
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        ft = supportFragmentManager.beginTransaction()
-
-        val fragment = BookingFragment.newInstance()
-        ft.replace(R.id.homeFrame, fragment)
-        ft.commit()
-
-        /*if(intent.hasExtra("reminder_edit")){
+        if(intent.hasExtra("booking_edit")){
             edit = true
-            valet = intent.extras.getParcelable<ValetModel>("reminder_edit")
-            carBrand.setText(valet.carBrand)
-            carModel.setText(valet.carModel)
+            valet = intent.extras!!.getParcelable<ValetModel>("booking_edit")!!
+            carBrandReport.text = valet.carBrand
+            carModelReport.text = valet.carModel
             numberPlate.setText(valet.numberPlate)
-            showDate.setText(valet.date)
-        }*/
+            showDate.text = valet.date
+            btnAddCar.text = "Save Booking"
+        }
 
-        /*var cal = Calendar.getInstance()
+        btnAddCar.setOnClickListener{
+            valet.carBrand = carBrand.text.toString()
+            valet.carModel = carModel.text.toString()
+            valet.numberPlate = numberPlate.text.toString()
+            valet.date = showDate.text.toString()
+            if(valet.carBrand.isEmpty()){
+                toast("Please enter a car")
+            }else {
+                if (edit) {
+                    app.valets.update(valet.copy())
+                } else {
+                    app.valets.create(valet.copy())
+                }
+            }
+            toast("Add button Pressed: $carBrand")
+            setResult(AppCompatActivity.RESULT_OK)
+            finish()
+        }
+
+        //Date Picker (https://stackoverflow.com/questions/45842167/how-to-use-datepickerdialog-in-kotlin#45844018)
+        var cal = Calendar.getInstance()
         val dateSetListener = DatePickerDialog.OnDateSetListener{ view, year, month, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, month)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            val format = "dd/MM/yyy"
+            val format = "dd.MM.yyy"
             val sdf = SimpleDateFormat(format, Locale.UK)
             showDate.text = sdf.format(cal.time)
         }
 
+        //Show Date Picker
         btnGoCalendar.setOnClickListener{
             DatePickerDialog(this, dateSetListener,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)).show()
-        }*/
-    }
-
-    public fun navigateTo(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.homeFrame, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            //todo Change the donate  nav_donate & nav_report is in activity_home_drawer.xml
-            R.id.nav_donate -> navigateTo(BookingFragment.newInstance())
-            R.id.nav_report -> navigateTo(DisplayBookingsFragment.newInstance())
-
-            else -> toast("You Selected Something Else")
         }
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean{
+        menuInflater.inflate(R.menu.menu_booking, menu)
+        if (edit && menu != null) menu.getItem(0).isVisible = true
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.item_delete -> {
+                app.valets.delete(valet)
+                finish()
+            }
+            R.id.item_cancel -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -85,18 +85,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/numberPlate" />
 
-    <TextView
-        android:id="@+id/showDate"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
-        android:hint="@string/date"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btnGoCalendar" />
-
     <!--<RadioGroup
         android:id="@+id/serviceType"
         android:layout_width="150dp"
@@ -118,6 +106,18 @@
             android:layout_height="wrap_content"
             android:text="@string/premiumService" />
     </RadioGroup>-->
+
+    <TextView
+        android:id="@+id/showDate"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:hint="@string/date"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btnGoCalendar" />
 
     <Button
         android:id="@+id/btnAddCar"
