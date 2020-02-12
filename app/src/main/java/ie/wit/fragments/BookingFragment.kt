@@ -53,14 +53,14 @@ class BookingFragment : Fragment() , AnkoLogger{
 
     fun setButtonListener( layout: View) {
 
-        /*if(intent.hasExtra("reminder_edit")){
+        if(intent.hasExtra("reminder_edit")){
             edit = true
             valet = intent.extras.getParceablt<ValetModel>("reminder_edit")
             carBrand.setText(valet.carBrand)
             carModel.setText(valet.carModel)
             numberPlate.setText(valet.numberPlate)
             showDate.setText(valet.date)
-        }*/
+        }
 
         layout.btnAddCar.setOnClickListener{
             valet.carBrand = carModel.text.toString()
