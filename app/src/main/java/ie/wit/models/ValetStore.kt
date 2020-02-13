@@ -1,5 +1,6 @@
 package ie.wit.models
 
+
 interface ValetStore {
     fun findAll(): List<ValetModel>
     fun create(valet: ValetModel)

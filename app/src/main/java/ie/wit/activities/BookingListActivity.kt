@@ -27,9 +27,11 @@ class BookingListActivity : AppCompatActivity(), ValetListener{
         setContentView(R.layout.activity_booking_list)
         app = application as ValetApp
 
+        //layout and populate for display
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
+        //enable action bar and set title
         toolbarMain.title = title
         setSupportActionBar(toolbarMain)
     }

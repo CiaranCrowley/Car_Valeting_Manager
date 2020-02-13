@@ -1,15 +1,9 @@
 <resources>
-    <!--todo: most of these have to be changed-->
     <string name="app_name">Car_Valeting_Management</string>
-    <string name="action_donate">Valet</string>
-    <string name="action_report">Report</string>
     <string name="addNewAppointment">Create a new entry here</string>
-
     <string name="menu_addCar">Add New Car</string>
-    <string name="menu_report">Booked Cars</string>
     <string name="menu_deleteBooking">Delete</string>
-    <string name="menu_cancelBooking">Cancel Us</string>\
-
+    <string name="menu_cancelBooking">Cancel</string>
     <string name="carBrand">Car Brand Name (e.g. Ford)</string>
     <string name="carModel">Car Model (e.g. Fiesta)</string>
     <string name="go_to_calendar">Enter a Date</string>

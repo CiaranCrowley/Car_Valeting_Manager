@@ -1,5 +1,6 @@
 package ie.wit.models
 
+import android.content.Context
 import android.util.Log
 import org.jetbrains.anko.AnkoLogger
 
@@ -28,9 +29,6 @@ class ValetMemStore : ValetStore, AnkoLogger {
             foundBooking.brand = valet.brand
             foundBooking.model = valet.model
             foundBooking.numberPlate = valet.numberPlate
-/*
-            foundBooking.serviceType = valet.serviceType
-*/
             foundBooking.date = valet.date
             logAll()
         }
