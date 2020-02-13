@@ -4,15 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.wit.fragments.BookingFragment">
-
-    <FrameLayout
-        android:id="@+id/contentFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-    </FrameLayout>
+    tools:context="ie.wit.activities.BookingActivity">
 
     <TextView
         android:id="@+id/addNewAppointment"
@@ -84,28 +76,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/numberPlate" />
-
-    <!--<RadioGroup
-        android:id="@+id/serviceType"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carModel">
-
-        <RadioButton
-            android:id="@+id/standardService"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/standardService" />
-
-        <RadioButton
-            android:id="@+id/premiumService"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/premiumService" />
-    </RadioGroup>-->
 
     <TextView
         android:id="@+id/showDate"

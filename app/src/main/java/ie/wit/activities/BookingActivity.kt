@@ -10,11 +10,13 @@ import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
 import kotlinx.android.synthetic.main.activity_booking.*
 import kotlinx.android.synthetic.main.card_valet.*
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BookingActivity : AppCompatActivity() {
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+class BookingActivity : AppCompatActivity(), AnkoLogger {
 
     var valet = ValetModel()
     var edit = false
@@ -28,19 +30,19 @@ class BookingActivity : AppCompatActivity() {
         if(intent.hasExtra("booking_edit")){
             edit = true
             valet = intent.extras!!.getParcelable<ValetModel>("booking_edit")!!
-            carBrandReport.text = valet.carBrand
-            carModelReport.text = valet.carModel
+            carBrand.setText(valet.brand)
+            carModel.setText(valet.model)
             numberPlate.setText(valet.numberPlate)
-            showDate.text = valet.date
+            showDate.setText(valet.date)
             btnAddCar.text = "Save Booking"
         }
 
         btnAddCar.setOnClickListener{
-            valet.carBrand = carBrand.text.toString()
-            valet.carModel = carModel.text.toString()
+            valet.brand= carBrand.text.toString()
+            valet.model = carModel.text.toString()
             valet.numberPlate = numberPlate.text.toString()
             valet.date = showDate.text.toString()
-            if(valet.carBrand.isEmpty()){
+            if(valet.brand.isEmpty()){
                 toast("Please enter a car")
             }else {
                 if (edit) {
@@ -49,14 +51,14 @@ class BookingActivity : AppCompatActivity() {
                     app.valets.create(valet.copy())
                 }
             }
-            toast("Add button Pressed: $carBrand")
+            print(carBrand)
             setResult(AppCompatActivity.RESULT_OK)
             finish()
         }
 
         //Date Picker (https://stackoverflow.com/questions/45842167/how-to-use-datepickerdialog-in-kotlin#45844018)
         var cal = Calendar.getInstance()
-        val dateSetListener = DatePickerDialog.OnDateSetListener{ view, year, month, dayOfMonth ->
+        val dateSetListener = DatePickerDialog.OnDateSetListener{ _, year, month, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, month)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)

@@ -5,8 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ValetModel(var id: Long = 0,
-                      var carBrand: String = "",
-                      var carModel: String = "",
+                      var brand: String = "",
+                      var model: String = "",
                       var numberPlate: String = "",
                       /*var serviceType: String = "",*/
                       var date: String = "") : Parcelable

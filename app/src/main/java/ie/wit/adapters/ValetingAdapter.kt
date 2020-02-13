@@ -18,7 +18,7 @@ class ValetingAdapter constructor(private var valets: List<ValetModel>,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         return MainHolder(
-            LayoutInflater.from(parent?.context).inflate(
+            LayoutInflater.from(parent.context).inflate(
                 R.layout.card_valet,
                 parent,
                 false
@@ -36,8 +36,9 @@ class ValetingAdapter constructor(private var valets: List<ValetModel>,
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(valet: ValetModel, listener: ValetListener) {
-            itemView.carBrandReport.text = valet.carBrand
-            itemView.carModelReport.text = valet.carModel
+            itemView.carBrandDisplay.text = valet.brand
+            //itemView.carBrandDisplay.setText(valet.brand)
+            itemView.carModelDisplay.text = valet.model
             itemView.dateShown.text = valet.date
 /*
             itemView.serviceType.text = valet.serviceType

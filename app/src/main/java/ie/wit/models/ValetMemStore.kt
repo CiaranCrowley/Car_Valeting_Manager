@@ -25,8 +25,8 @@ class ValetMemStore : ValetStore, AnkoLogger {
     override fun update(valet: ValetModel) {
         var foundBooking: ValetModel? = valets.find{p -> p.id == valet.id}
         if(foundBooking != null){
-            foundBooking.carBrand = valet.carBrand
-            foundBooking.carModel = valet.carModel
+            foundBooking.brand = valet.brand
+            foundBooking.model = valet.model
             foundBooking.numberPlate = valet.numberPlate
 /*
             foundBooking.serviceType = valet.serviceType
@@ -41,7 +41,6 @@ class ValetMemStore : ValetStore, AnkoLogger {
     }
 
     fun logAll() {
-        //todo these have to be changed
-        valets.forEach { Log.v("Donate","${it}") }
+        valets.forEach { Log.v("Booking","${it}") }
     }
 }
