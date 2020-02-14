@@ -30,6 +30,7 @@ class BookingListActivity : AppCompatActivity(), ValetListener{
         //layout and populate for display
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
+        loadBookings()
 
         //enable action bar and set title
         toolbarMain.title = title

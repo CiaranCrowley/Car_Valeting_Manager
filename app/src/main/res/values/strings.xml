@@ -16,4 +16,5 @@
     <string name="brand">Brand</string>
     <string name="model">Model</string>
     <string name="dateHint">Date</string>
+    <string name="sign_out_button">Sign Out</string>
 </resources>

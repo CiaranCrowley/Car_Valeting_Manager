@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "469300608061",
+    "firebase_url": "https://car-valeting-manager.firebaseio.com",
+    "project_id": "car-valeting-manager",
+    "storage_bucket": "car-valeting-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469300608061:android:1029c77a0c022d4a7fbe54",
+        "android_client_info": {
+          "package_name": "ie.wit.car_valeting_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "469300608061-f885veere622t3l8vqenluimun1j5489.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ie.wit.car_valeting_manager",
+            "certificate_hash": "6bef5938a112952d70a63b311c61397c35aef8e6"
+          }
+        },
+        {
+          "client_id": "469300608061-s7cg6gl53bkn6dcvcamtk39pqspimvgj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbXRqC-MJb2PEQSnN0ghT5ThuL_45YP-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "469300608061-s7cg6gl53bkn6dcvcamtk39pqspimvgj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

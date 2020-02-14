@@ -1,18 +1,18 @@
 package ie.wit.main
 
 import android.app.Application
+import android.util.Log
 import ie.wit.models.ValetJSONStore
+import ie.wit.models.ValetMemStore
 import ie.wit.models.ValetStore
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 
-class ValetApp : Application(), AnkoLogger {
+class ValetApp : Application() {
 
     lateinit var valets: ValetStore
 
     override fun onCreate() {
         super.onCreate()
         valets = ValetJSONStore(applicationContext)
-        info("Booking started")
+        Log.v("Valet","Valet App started")
     }
 }

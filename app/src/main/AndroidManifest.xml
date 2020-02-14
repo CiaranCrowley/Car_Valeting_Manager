@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ie.wit">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".main.ValetApp"
         android:allowBackup="true"
@@ -10,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".activities.GoogleSignInActivity"></activity>
+        <activity android:name=".activities.SignInActivity" />
         <activity android:name=".activities.BookingActivity" />
         <activity
             android:name=".activities.BookingListActivity"

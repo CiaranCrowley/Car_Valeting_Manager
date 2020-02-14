@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carModel"></com.google.android.material.textfield.TextInputEditText>
+        app:layout_constraintTop_toBottomOf="@+id/carModel" />
 
     <Button
         android:id="@+id/btnGoCalendar"
@@ -67,7 +67,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/btnColor"
         android:text="@string/go_to_calendar"
         android:textAllCaps="false"
         android:textSize="18sp"
@@ -95,7 +94,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@color/btnColor"
         android:text="@string/addNewCar"
         android:textAllCaps="false"
         android:textSize="18sp"

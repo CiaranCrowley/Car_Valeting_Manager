@@ -1,20 +1,12 @@
 package ie.wit.models
 
-/*import android.content.Context
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
-import org.jetbrains.anko.AnkoLogger
-import java.nio.file.Files.exists
-import kotlin.random.Random
-import ie.wit.helpers.**/
+
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import ie.wit.helpers.*
-import java.nio.file.Files.exists
 import java.util.*
 
 

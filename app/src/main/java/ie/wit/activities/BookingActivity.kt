@@ -1,6 +1,7 @@
 package ie.wit.activities
 
 import android.app.DatePickerDialog
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,9 +10,9 @@ import ie.wit.R
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
 import kotlinx.android.synthetic.main.activity_booking.*
-import kotlinx.android.synthetic.main.card_valet.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
+
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,7 +30,7 @@ class BookingActivity : AppCompatActivity(), AnkoLogger {
 
         if(intent.hasExtra("booking_edit")){
             edit = true
-            valet = intent.extras!!.getParcelable<ValetModel>("booking_edit")!!
+            valet = intent.extras!!.getParcelable("booking_edit")!!
             carBrand.setText(valet.brand)
             carModel.setText(valet.model)
             numberPlate.setText(valet.numberPlate)
@@ -51,8 +52,9 @@ class BookingActivity : AppCompatActivity(), AnkoLogger {
                     app.valets.create(valet.copy())
                 }
             }
+
             print(carBrand)
-            setResult(AppCompatActivity.RESULT_OK)
+            setResult(RESULT_OK)
             finish()
         }
 
@@ -63,7 +65,7 @@ class BookingActivity : AppCompatActivity(), AnkoLogger {
             cal.set(Calendar.MONTH, month)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            val format = "dd.MM.yyy"
+            val format = "dd/MM/yyy"
             val sdf = SimpleDateFormat(format, Locale.UK)
             showDate.text = sdf.format(cal.time)
         }

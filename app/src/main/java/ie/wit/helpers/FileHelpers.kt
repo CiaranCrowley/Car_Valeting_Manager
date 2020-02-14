@@ -38,3 +38,8 @@ fun read(context: Context, fileName: String): String{
     }
     return str
 }
+
+fun exists(context: Context, fileName: String): Boolean{
+    val file = context.getFileStreamPath(fileName)
+    return file.exists()
+}
