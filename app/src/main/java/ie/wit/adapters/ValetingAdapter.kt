@@ -37,12 +37,9 @@ class ValetingAdapter constructor(private var valets: List<ValetModel>,
 
         fun bind(valet: ValetModel, listener: ValetListener) {
             itemView.carBrandDisplay.text = valet.brand
-            //itemView.carBrandDisplay.setText(valet.brand)
             itemView.carModelDisplay.text = valet.model
+            itemView.licensePlateDisplay.text = valet.numberPlate
             itemView.dateShown.text = valet.date
-/*
-            itemView.serviceType.text = valet.serviceType
-*/
             itemView.setOnClickListener{listener.onValetClick(valet)}
         }
     }

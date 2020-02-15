@@ -14,25 +14,36 @@
 
         <TextView
             android:id="@+id/carBrandDisplay"
-            android:layout_width="100dp"
+            android:layout_width="70dp"
             android:layout_height="30dp"
+            android:hint="@string/car_brand_hint"
             android:textColor="#000000" />
 
         <TextView
             android:id="@+id/carModelDisplay"
-            android:layout_width="100dp"
+            android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_marginStart="8dp"
             android:layout_toEndOf="@+id/carBrandDisplay"
+            android:hint="@string/car_model_hint"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/licensePlateDisplay"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/carModelDisplay"
+            android:hint="@string/license_plate_hint"
             android:textColor="#000000" />
 
         <TextView
             android:id="@+id/dateShown"
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="30dp"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@id/carModelDisplay"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@id/licensePlateDisplay"
             android:hint="@string/dateHint"
             android:textColor="#000000"
             android:textSize="14sp" />

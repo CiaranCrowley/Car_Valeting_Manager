@@ -18,4 +18,7 @@
     <string name="dateHint">Date</string>
     <string name="sign_out_button">Sign Out</string>
     <string name="sign_in_screen_title">Please Sign In To Continue</string>
+    <string name="car_brand_hint">Car</string>
+    <string name="car_model_hint">Car Model</string>
+    <string name="license_plate_hint">License Plate</string>
 </resources>
