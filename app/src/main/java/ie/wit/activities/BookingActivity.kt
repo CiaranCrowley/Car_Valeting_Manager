@@ -1,18 +1,16 @@
 package ie.wit.activities
 
 import android.app.DatePickerDialog
-
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import ie.wit.R
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
 import kotlinx.android.synthetic.main.activity_booking.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
-
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,6 +25,7 @@ class BookingActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
         app = application as ValetApp
+
 
         if(intent.hasExtra("booking_edit")){
             edit = true

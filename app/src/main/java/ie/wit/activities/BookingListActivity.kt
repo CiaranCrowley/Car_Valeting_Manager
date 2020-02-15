@@ -11,8 +11,6 @@ import ie.wit.adapters.ValetListener
 import ie.wit.adapters.ValetingAdapter
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
-import kotlinx.android.synthetic.main.activity_booking.*
-import kotlinx.android.synthetic.main.activity_booking.view.*
 import kotlinx.android.synthetic.main.activity_booking_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
@@ -33,8 +31,8 @@ class BookingListActivity : AppCompatActivity(), ValetListener{
         loadBookings()
 
         //enable action bar and set title
-        toolbarMain.title = title
-        setSupportActionBar(toolbarMain)
+        //toolbarMain.title = title
+        //setSupportActionBar(toolbarMain)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
