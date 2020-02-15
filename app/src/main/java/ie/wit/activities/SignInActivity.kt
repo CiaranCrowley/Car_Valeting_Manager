@@ -54,7 +54,7 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
@@ -69,16 +69,16 @@ class SignInActivity : AppCompatActivity() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>){
         try{
             //val account = completedTask.getResult(ApiException::class.java)
-            /*sign_in_button.visibility = View.GONE
+            *//*sign_in_button.visibility = View.GONE
             if (account != null) {
                 tv_name.text = account.displayName
             }
-            tv_name.visibility = View.VISIBLE*/
+            tv_name.visibility = View.VISIBLE*//*
 
 
         }catch (e: ApiException){
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
         }
-    }
+    }*/
 }
