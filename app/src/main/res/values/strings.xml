@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Car_Valeting_Management</string>
+    <string name="app_name">Car Valeting Management</string>
     <string name="addNewAppointment">Create a new entry here</string>
     <string name="menu_addCar">Add New Car</string>
     <string name="menu_deleteBooking">Delete</string>
@@ -17,4 +17,5 @@
     <string name="model">Model</string>
     <string name="dateHint">Date</string>
     <string name="sign_out_button">Sign Out</string>
+    <string name="sign_in_screen_title">Please Sign In To Continue</string>
 </resources>

@@ -30,9 +30,9 @@ class BookingListActivity : AppCompatActivity(), ValetListener{
         recyclerView.layoutManager = layoutManager
         loadBookings()
 
-        //enable action bar and set title
-        //toolbarMain.title = title
-        //setSupportActionBar(toolbarMain)
+        /*enable action bar and set title
+        toolbarMain.title = title
+        setSupportActionBar(toolbarMain)*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
