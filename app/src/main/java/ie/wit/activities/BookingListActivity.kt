@@ -1,5 +1,6 @@
 package ie.wit.activities
 
+/*
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -30,9 +31,11 @@ class BookingListActivity : AppCompatActivity(), ValetListener{
         recyclerView.layoutManager = layoutManager
         loadBookings()
 
-        /*enable action bar and set title
+        */
+/*enable action bar and set title
         toolbarMain.title = title
-        setSupportActionBar(toolbarMain)*/
+        setSupportActionBar(toolbarMain)*//*
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -67,4 +70,4 @@ class BookingListActivity : AppCompatActivity(), ValetListener{
     }
 
 
-}
+}*/

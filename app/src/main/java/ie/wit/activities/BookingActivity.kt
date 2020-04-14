@@ -1,5 +1,6 @@
-package ie.wit.activities
 
+package ie.wit.activities
+/*
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.Menu
@@ -97,3 +98,4 @@ class BookingActivity : AppCompatActivity(), AnkoLogger {
         return super.onOptionsItemSelected(item)
     }
 }
+*/

@@ -16,9 +16,30 @@
     <string name="brand">Brand</string>
     <string name="model">Model</string>
     <string name="dateHint">Date</string>
-    <string name="sign_out_button">Sign Out</string>
-    <string name="sign_in_screen_title">Please Sign In To Continue</string>
     <string name="car_brand_hint">Car</string>
     <string name="car_model_hint">Car Model</string>
     <string name="license_plate_hint">License Plate</string>
+
+    <!--All below is stuff from the fragments lab-->
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Donation (Lab K07a)</string>
+    <string name="nav_header_subtitle">voteforhomer@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!--Next 2 lines are important for the Nav_Drawer-->
+    <string name="book_a_car">Book a Car</string>
+    <string name="show_bookings">Show Bookings</string>
+
+    <string name="action_book">Book this Car</string>
+
+    <string name="menu_favourites">Favourites</string>
+    <string name="menu_about">About Us</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

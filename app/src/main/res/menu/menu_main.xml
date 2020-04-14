@@ -4,8 +4,14 @@
     tools:context="ie.wit.activities.Valet">
 
     <item
-        android:id="@+id/item_add"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/menu_addCar"
-        app:showAsAction="always"/>
+        android:id="@+id/action_bookingList"
+        android:orderInCategory="100"
+        android:title="@string/show_bookings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_createBooking"
+        android:orderInCategory="100"
+        android:title="@string/book_a_car"
+        app:showAsAction="never" />
 </menu>
