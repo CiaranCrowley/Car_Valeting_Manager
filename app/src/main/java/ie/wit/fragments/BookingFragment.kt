@@ -78,7 +78,8 @@ class BookingFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
                 if (edit) {
                     //app.valets.update(valet.copy())
                 } else {
-                    app.valetStore.create(valet.copy())
+                    //app.valetStore.create(valet.copy())
+                    //addBooking(PUT SOMETHING IN HERE.. EG. "paymenttype = paymentmethod,amount = amount")
                 }
             }
 
@@ -98,7 +99,7 @@ class BookingFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
                             response: Response<List<ValetModel>>) {
         serviceAvailableMessage(activity!!)
         info("Retrofit JSON = $response.raw()")
-        app.valetStore.valets = response.body() as ArrayList<ValetModel>
+        app.valets = response.body() as ArrayList<ValetModel>
         updateUI()
         hideLoader(loader)
     }

@@ -32,17 +32,13 @@ class BookingListFragment : Fragment()/*, ValetListener*/ {
         var root = inflater.inflate(R.layout.fragment_booking_list, container, false)
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
-        root.recyclerView.adapter = ValetingAdapter(app.valetStore.findAll())
+        root.recyclerView.adapter = ValetingAdapter(app.valets)
 
         //loadBookings()
 
 
         return root
     }
-
-    /*private fun setButtonListener(layout: View){
-
-    }*/
 
     companion object {
         @JvmStatic
@@ -51,23 +47,4 @@ class BookingListFragment : Fragment()/*, ValetListener*/ {
                 arguments = Bundle().apply { }
             }
     }
-
-    /*override fun onValetClick(valet: ValetModel) {
-        startActivityForResult(intentFor<BookingFragment>().putExtra("booking_edit", valet), 0)
-
-    }*/
-
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //loadBookings()
-        super.onActivityResult(requestCode, resultCode, data)
-    }*/
-
-    /*private fun loadBookings(){
-        showBookings(app.valets.findAll())
-    }
-
-    private fun showBookings(bookings: List<ValetModel>){
-        recyclerView.adapter = ValetingAdapter(bookings, this)
-        recyclerView.adapter?.notifyDataSetChanged()
-    }*/
 }
