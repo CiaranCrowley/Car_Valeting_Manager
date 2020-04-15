@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ie.wit.R
+import ie.wit.api.ValetWrapper
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
 import ie.wit.utils.*
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_booking.*
 import kotlinx.android.synthetic.main.fragment_booking.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.support.v4.act
 import org.jetbrains.anko.support.v4.toast
 import retrofit2.Call
 import retrofit2.Callback
@@ -122,5 +124,25 @@ class BookingFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
         showLoader(loader, "Downloading Booking List")
         var callGetAll = app.valetService.getall()
         callGetAll.enqueue(this)
+    }
+
+    fun addBooking(booking : ValetModel){
+        showLoader(loader, "Adding booking to server...")
+        var callAdd = app.valetService.post(valet)
+        callAdd.enqueue(object : Callback<ValetWrapper>{
+            override fun onFailure(call: Call<ValetWrapper>, t: Throwable) {
+                info("Retrofit Error : $t.message")
+                serviceUnavailableMessage(activity!!)
+                hideLoader(loader)
+            }
+
+            override fun onResponse(call: Call<ValetWrapper>, response: Response<ValetWrapper>) {
+                val valetWrapper = response.body()
+                info("Retrofit Wrapper : $valetWrapper")
+                getAllBookings()
+                updateUI()
+                hideLoader(loader)
+            }
+        })
     }
 }
