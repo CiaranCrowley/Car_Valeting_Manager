@@ -1,27 +1,34 @@
 package ie.wit.fragments
 
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentTransaction
 import ie.wit.R
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
+import ie.wit.utils.*
 import kotlinx.android.synthetic.main.fragment_booking.*
 import kotlinx.android.synthetic.main.fragment_booking.view.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.support.v4.toast
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.lang.String.format
 import java.util.*
 
-class BookingFragment : Fragment() {
+class BookingFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
 
     var valet = ValetModel()
     var edit = false
     lateinit var app: ValetApp
-    lateinit var ft: FragmentTransaction
+    lateinit var loader : AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +41,7 @@ class BookingFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_booking, container, false)
+        loader = createLoader(activity!!)
         activity?.title = getString(R.string.action_book)
 
         setButtonListener(root)
@@ -82,5 +90,37 @@ class BookingFragment : Fragment() {
             BookingFragment().apply {
                 arguments = Bundle().apply {}
             }
+    }
+
+    override fun onResponse(call: Call<List<ValetModel>>,
+                            response: Response<List<ValetModel>>) {
+        serviceAvailableMessage(activity!!)
+        info("Retrofit JSON = $response.raw()")
+        app.valetStore.valets = response.body() as ArrayList<ValetModel>
+        updateUI()
+        hideLoader(loader)
+    }
+
+    override fun onFailure(call: Call<List<ValetModel>>, t: Throwable) {
+        info("Retrofit Error : $t.message")
+        serviceUnavailableMessage(activity!!)
+        hideLoader(loader)
+    }
+
+    fun updateUI() {
+        /*totalDonated = app.donationsStore.findAll().sumBy { it.amount }
+        progressBar.progress = totalDonated
+        totalSoFar.text = format("$ $totalDonated")*/
+    }
+
+    override fun onResume(){
+        super.onResume()
+        getAllBookings()
+    }
+
+    fun getAllBookings(){
+        showLoader(loader, "Downloading Booking List")
+        var callGetAll = app.valetService.getall()
+        callGetAll.enqueue(this)
     }
 }

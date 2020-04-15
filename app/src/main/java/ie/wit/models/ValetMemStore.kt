@@ -11,7 +11,7 @@ internal fun getId(): Long{
 
 class ValetMemStore : ValetStore{
 
-    val valets = ArrayList<ValetModel>()
+    var valets = ArrayList<ValetModel>()
 
     override fun findAll(): List<ValetModel> {
         return valets
