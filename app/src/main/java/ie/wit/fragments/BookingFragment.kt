@@ -79,6 +79,7 @@ class BookingFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
                     //app.valets.update(valet.copy())
                 } else {
                     app.valetStore.create(valet.copy())
+                    //addBooking(PUT SOMETHING IN HERE.. EG. "paymenttype = paymentmethod,amount = amount")
                 }
             }
 
