@@ -1,7 +1,6 @@
 package ie.wit.fragments
 
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,11 +13,7 @@ import ie.wit.adapters.ValetListener
 */
 import ie.wit.adapters.ValetingAdapter
 import ie.wit.main.ValetApp
-import ie.wit.models.ValetModel
-import kotlinx.android.synthetic.main.fragment_booking_list.*
 import kotlinx.android.synthetic.main.fragment_booking_list.view.*
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.support.v4.intentFor
 
 class BookingListFragment : Fragment()/*, ValetListener*/ {
 
@@ -37,7 +32,7 @@ class BookingListFragment : Fragment()/*, ValetListener*/ {
         var root = inflater.inflate(R.layout.fragment_booking_list, container, false)
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
-        root.recyclerView.adapter = ValetingAdapter(app.valets.findAll())
+        root.recyclerView.adapter = ValetingAdapter(app.valetStore.findAll())
 
         //loadBookings()
 

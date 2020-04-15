@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import ie.wit.R
 import ie.wit.main.ValetApp
@@ -15,7 +14,6 @@ import ie.wit.models.ValetModel
 import kotlinx.android.synthetic.main.fragment_booking.*
 import kotlinx.android.synthetic.main.fragment_booking.view.*
 import org.jetbrains.anko.support.v4.toast
-import org.jetbrains.anko.toast
 import java.util.*
 
 class BookingFragment : Fragment() {
@@ -70,7 +68,7 @@ class BookingFragment : Fragment() {
                 if (edit) {
                     //app.valets.update(valet.copy())
                 } else {
-                    app.valets.create(valet.copy())
+                    app.valetStore.create(valet.copy())
                 }
             }
 
