@@ -45,9 +45,9 @@ class BookingListFragment : Fragment()/*, ValetListener*/ {
         return root
     }
 
-    private fun setButtonListener(layout: View){
+    /*private fun setButtonListener(layout: View){
 
-    }
+    }*/
 
     companion object {
         @JvmStatic

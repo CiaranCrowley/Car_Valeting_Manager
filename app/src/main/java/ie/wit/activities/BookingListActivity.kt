@@ -32,7 +32,7 @@ class BookingListActivity : AppCompatActivity(), ValetListener{
         loadBookings()
 
         */
-/*enable action bar and set title
+        /*enable action bar and set title
         toolbarMain.title = title
         setSupportActionBar(toolbarMain)*//*
 

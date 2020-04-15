@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import ie.wit.R
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
@@ -22,6 +23,7 @@ class BookingFragment : Fragment() {
     var valet = ValetModel()
     var edit = false
     lateinit var app: ValetApp
+    lateinit var ft: FragmentTransaction
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +68,7 @@ class BookingFragment : Fragment() {
                 toast("Please enter a car")
             }else {
                 if (edit) {
-                    app.valets.update(valet.copy())
+                    //app.valets.update(valet.copy())
                 } else {
                     app.valets.create(valet.copy())
                 }
