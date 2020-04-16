@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import ie.wit.R
 /*
@@ -46,6 +48,16 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
         root.recyclerView.adapter = ValetingAdapter(app.valets)
         loader = createLoader(activity!!)
         setSwipeRefresh()
+
+        val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val adapter = root.recyclerView.adapter as ValetingAdapter
+                adapter.removeAt(viewHolder.adapterPosition)
+
+            }
+        }
+        val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
+        itemTouchDeleteHelper.attachToRecyclerView(root.recyclerView)
 
         //loadBookings()
 

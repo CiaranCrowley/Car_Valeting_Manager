@@ -111,7 +111,7 @@ class BookingFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
     }
 
     fun updateUI() {
-        /*totalDonated = app.donationsStore.findAll().sumBy { it.amount }
+        /*totalDonated = app.donations.sumBy { it.amount }
         progressBar.progress = totalDonated
         totalSoFar.text = format("$ $totalDonated")*/
     }
