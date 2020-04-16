@@ -16,12 +16,14 @@ import ie.wit.R
 import ie.wit.adapters.ValetListener
 */
 import ie.wit.adapters.ValetingAdapter
+import ie.wit.api.ValetWrapper
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
 import ie.wit.utils.*
 import kotlinx.android.synthetic.main.fragment_booking_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.support.v4.act
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,7 +55,7 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val adapter = root.recyclerView.adapter as ValetingAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
-
+                deleteBooking(viewHolder.itemView.tag as String)
             }
         }
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
@@ -109,6 +111,22 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
         showLoader(loader, "Downloading the Donations List")
         var callGetAll = app.valetService.getall()
         callGetAll.enqueue(this)
+    }
+
+    fun deleteBooking(id: String){
+        showLoader(loader, "Deleting Booking $id")
+        val callDelete = app.valetService.delete(id)
+        callDelete.enqueue(object : Callback<ValetWrapper>{
+            override fun onFailure(call: Call<ValetWrapper>, t: Throwable) {
+                info("Retrofit Error : $t.message")
+                serviceUnavailableMessage(activity!!)
+                hideLoader(loader)
+            }
+
+            override fun onResponse(call: Call<ValetWrapper>, response: Response<ValetWrapper>) {
+                hideLoader(loader)
+            }
+        })
     }
 
     override fun onResume() {
