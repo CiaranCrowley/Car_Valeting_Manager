@@ -16,6 +16,7 @@ import ie.wit.R
 import ie.wit.adapters.ValetListener
 */
 import ie.wit.adapters.ValetingAdapter
+import ie.wit.adapters.ValetingListener
 import ie.wit.api.ValetWrapper
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
@@ -27,11 +28,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
+class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>>, ValetingListener {
 
     lateinit var app: ValetApp
     lateinit var loader: AlertDialog
     lateinit var root: View
+    var editBooking: ValetModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +48,7 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
         root = inflater.inflate(R.layout.fragment_booking_list, container, false)
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
-        root.recyclerView.adapter = ValetingAdapter(app.valets)
+        root.recyclerView.adapter = ValetingAdapter(app.valets, this)
         loader = createLoader(activity!!)
         setSwipeRefresh()
 
@@ -100,7 +102,7 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
         serviceAvailableMessage(activity!!)
         info("Retrofit JSON = ${response.body()}")
         app.valets = response.body() as ArrayList<ValetModel>
-        root.recyclerView.adapter = ValetingAdapter(app.valets)
+        root.recyclerView.adapter = ValetingAdapter(app.valets, this)
         root.recyclerView.adapter?.notifyDataSetChanged()
         checkSwipeRefresh()
         hideLoader(loader)
@@ -126,6 +128,13 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
                 hideLoader(loader)
             }
         })
+    }
+
+    override fun onValetClick(valet: ValetModel){
+        activity!!.supportFragmentManager.beginTransaction()
+            .replace(R.id.homeFrame, EditFragment.newInstance(valet))
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onResume() {
