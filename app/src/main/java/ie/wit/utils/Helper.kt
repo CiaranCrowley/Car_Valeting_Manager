@@ -1,6 +1,6 @@
 package ie.wit.utils
 
-import android.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import ie.wit.R

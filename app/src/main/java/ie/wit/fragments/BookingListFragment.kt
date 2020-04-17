@@ -1,7 +1,7 @@
 package ie.wit.fragments
 
 
-import android.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,7 +23,6 @@ import ie.wit.utils.*
 import kotlinx.android.synthetic.main.fragment_booking_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.jetbrains.anko.support.v4.act
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,7 +30,7 @@ import retrofit2.Response
 class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
 
     lateinit var app: ValetApp
-    lateinit var loader : AlertDialog
+    lateinit var loader: AlertDialog
     lateinit var root: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
