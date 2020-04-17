@@ -8,23 +8,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import ie.wit.R
+import ie.wit.api.ValetWrapper
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
 import ie.wit.utils.createLoader
+import ie.wit.utils.hideLoader
+import ie.wit.utils.serviceUnavailableMessage
+import ie.wit.utils.showLoader
+import kotlinx.android.synthetic.main.fragment_edit.view.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class EditFragment : Fragment() {
+class EditFragment : Fragment(), Callback<ValetWrapper>, AnkoLogger {
 
     lateinit var app: ValetApp
     lateinit var loader : AlertDialog
     lateinit var root: View
-    var editDonation: ValetModel? = null
+    var editBooking: ValetModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as ValetApp
 
         arguments?.let {
-            editDonation = it.getParcelable("editdonation")
+            editBooking = it.getParcelable("editdonation")
         }
     }
 
@@ -43,7 +53,36 @@ class EditFragment : Fragment() {
         root.editMessage.setText(editDonation!!.message)
         root.editUpvotes.setText(editDonation!!.upvotes.toString())*/
 
+        root.editUpdateButton.setOnClickListener {
+            showLoader(loader, "Updating Donation on Server...")
+            updateBookingData()
+            var callUpdate = app.valetService.put(app.auth.currentUser?.email,
+                (editBooking as ValetModel)._id ,editBooking as ValetModel)
+            callUpdate.enqueue(this)
+        }
+
         return root
+    }
+
+    override fun onFailure(call: Call<ValetWrapper>, t: Throwable) {
+        info("Retrofit Error : $t.message")
+        serviceUnavailableMessage(activity!!)
+        hideLoader(loader)
+    }
+
+    override fun onResponse(call: Call<ValetWrapper>, response: Response<ValetWrapper>) {
+        hideLoader(loader)
+        activity!!.supportFragmentManager.beginTransaction()
+            .replace(R.id.homeFrame, BookingListFragment.newInstance())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun updateBookingData(){
+        //todo change the obvious parts of this
+       /* editDonation!!.amount = root.editAmount.text.toString().toInt()
+        editDonation!!.message = root.editMessage.text.toString()
+        editDonation!!.upvotes = root.editUpvotes.text.toString().toInt()*/
     }
 
 

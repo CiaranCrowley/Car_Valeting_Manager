@@ -56,11 +56,19 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>>, 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val adapter = root.recyclerView.adapter as ValetingAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
-                deleteBooking(viewHolder.itemView.tag as String)
+                deleteBooking((viewHolder.itemView.tag as ValetModel)._id)
             }
         }
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
         itemTouchDeleteHelper.attachToRecyclerView(root.recyclerView)
+
+        val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                onValetClick(viewHolder.itemView.tag as ValetModel)
+            }
+        }
+        val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
+        itemTouchEditHelper.attachToRecyclerView(root.recyclerView)
 
         //loadBookings()
 

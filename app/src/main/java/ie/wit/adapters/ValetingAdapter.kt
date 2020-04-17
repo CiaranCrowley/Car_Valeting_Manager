@@ -41,7 +41,7 @@ class ValetingAdapter constructor(var valets: ArrayList<ValetModel>,
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(valet: ValetModel, listener: ValetingListener) {
-            itemView.tag = valet._id
+            itemView.tag = valet
             itemView.carBrandDisplay.text = valet.brand
             itemView.carModelDisplay.text = valet.model
             itemView.licensePlateDisplay.text = valet.numberPlate
