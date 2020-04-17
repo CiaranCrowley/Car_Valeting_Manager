@@ -114,7 +114,7 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
 
     fun deleteBooking(id: String){
         showLoader(loader, "Deleting Booking $id")
-        val callDelete = app.valetService.delete(id)
+        val callDelete = app.valetService.delete(app.auth.currentUser?.email, id)
         callDelete.enqueue(object : Callback<ValetWrapper>{
             override fun onFailure(call: Call<ValetWrapper>, t: Throwable) {
                 info("Retrofit Error : $t.message")

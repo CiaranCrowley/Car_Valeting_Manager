@@ -23,6 +23,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
+@Suppress("NAME_SHADOWING")
 class BookingFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
 
     var valet = ValetModel()
@@ -55,7 +56,7 @@ class BookingFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-        val dpd = DatePickerDialog(this!!.activity!!, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+        val dpd = DatePickerDialog(this.activity!!, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
 
             // Display Selected date in textbox
             showDate.text = "$dayOfMonth/$monthOfYear/$year"
@@ -121,13 +122,13 @@ class BookingFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>> {
 
     fun getAllBookings(){
         showLoader(loader, "Downloading Booking List")
-        var callGetAll = app.valetService.getall()
+        var callGetAll = app.valetService.findall(app.auth.currentUser?.email)
         callGetAll.enqueue(this)
     }
 
-    fun addBooking(booking : ValetModel){
+    fun addBooking(valet : ValetModel){
         showLoader(loader, "Adding booking to server...")
-        var callAdd = app.valetService.post(valet)
+        var callAdd = app.valetService.post(app.auth.currentUser?.email, valet)
         callAdd.enqueue(object : Callback<ValetWrapper>{
             override fun onFailure(call: Call<ValetWrapper>, t: Throwable) {
                 info("Retrofit Error : $t.message")
