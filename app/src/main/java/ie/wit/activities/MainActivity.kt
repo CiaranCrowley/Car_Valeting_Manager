@@ -13,19 +13,24 @@ import com.google.android.material.snackbar.Snackbar
 import ie.wit.R
 import ie.wit.fragments.BookingFragment
 import ie.wit.fragments.BookingListFragment
+import ie.wit.main.ValetApp
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_home.*
+import kotlinx.android.synthetic.main.nav_header_home.view.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class MainActivity : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var ft: FragmentTransaction
+    lateinit var app: ValetApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        app = application as ValetApp
 
         navView.setNavigationItemSelectedListener(this)
 
@@ -37,6 +42,8 @@ class MainActivity : AppCompatActivity(),
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
+        navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.email
+
         ft = supportFragmentManager.beginTransaction()
 
         val fragment = BookingFragment.newInstance()
@@ -47,8 +54,9 @@ class MainActivity : AppCompatActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_createBooking-> navigateTo(BookingFragment.newInstance())
+            R.id.nav_createBooking -> navigateTo(BookingFragment.newInstance())
             R.id.nav_bookingList -> navigateTo(BookingListFragment.newInstance())
+            R.id.nav_sign_out -> signOut()
 
             else -> toast("You Selected Something Else")
         }
@@ -73,5 +81,12 @@ class MainActivity : AppCompatActivity(),
             .replace(R.id.homeFrame, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun signOut()
+    {
+        app.auth.signOut()
+        startActivity<Login>()
+        finish()
     }
 }

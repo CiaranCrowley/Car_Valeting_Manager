@@ -21,6 +21,7 @@
     <string name="license_plate_hint">License Plate</string>
 
     <!--All below is stuff from the fragments lab-->
+    <!--todo change most of these-->
     <string name="title_activity_home">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -30,6 +31,7 @@
     <string name="action_settings">Settings</string>
 
     <!--Next 2 lines are important for the Nav_Drawer-->
+    <!--todo change most of these-->
     <string name="book_a_car">Book a Car</string>
     <string name="show_bookings">Show Bookings</string>
 
@@ -42,9 +44,11 @@
 
 
     <!--Next Line is from the Networking Lab-->
+    <!--todo change most of these-->
     <string name="messageLoading">Please Wait while the Donations are Loading…</string>
 
     <!--All below is taken from authentication lab-->
+    <!--todo change most of these-->
     <string name="label_emailpassword">Email/Password Authentication</string>
     <string name="desc_emailpassword">Use an email and password to authenticate with Firebase.</string>
     <string name="sign_in">Sign In</string>
