@@ -2,14 +2,14 @@ package ie.wit.main
 
 import android.app.Application
 import com.google.firebase.auth.FirebaseAuth
-import ie.wit.api.ValetService
+import com.google.firebase.database.DatabaseReference
 import ie.wit.models.ValetModel
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
 class ValetApp : Application(), AnkoLogger {
 
-    lateinit var valetService: ValetService
+    lateinit var database: DatabaseReference
     var valets = ArrayList<ValetModel>()
 
     // [START declare_auth]
@@ -19,7 +19,6 @@ class ValetApp : Application(), AnkoLogger {
     override fun onCreate(){
         super.onCreate()
         info("Valet App Started")
-        valetService = ValetService.create()
         info("Valet Service Created")
     }
 }

@@ -11,29 +11,28 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import ie.wit.R
 /*
 import ie.wit.adapters.ValetListener
 */
 import ie.wit.adapters.ValetingAdapter
 import ie.wit.adapters.ValetingListener
-import ie.wit.api.ValetWrapper
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
 import ie.wit.utils.*
 import kotlinx.android.synthetic.main.fragment_booking_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>>, ValetingListener {
+class BookingListFragment : Fragment(), AnkoLogger, ValetingListener {
 
     lateinit var app: ValetApp
     lateinit var loader: AlertDialog
     lateinit var root: View
-    var editBooking: ValetModel? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,29 +48,28 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>>, 
 
         root.recyclerView.layoutManager = LinearLayoutManager(activity)
         root.recyclerView.adapter = ValetingAdapter(app.valets, this)
-        loader = createLoader(activity!!)
+        loader = createLoader(requireActivity())
         setSwipeRefresh()
 
-        val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
+        val swipeDeleteHandler = object : SwipeToDeleteCallback(requireActivity()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val adapter = root.recyclerView.adapter as ValetingAdapter
                 adapter.removeAt(viewHolder.adapterPosition)
-                deleteBooking((viewHolder.itemView.tag as ValetModel)._id)
+                deleteBooking((viewHolder.itemView.tag as ValetModel).uid)
+                deleteUserBooking(app.auth.currentUser!!.uid,
+                    (viewHolder.itemView.tag as ValetModel).uid)
             }
         }
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
         itemTouchDeleteHelper.attachToRecyclerView(root.recyclerView)
 
-        val swipeEditHandler = object : SwipeToEditCallback(activity!!) {
+        val swipeEditHandler = object : SwipeToEditCallback(requireActivity()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 onValetClick(viewHolder.itemView.tag as ValetModel)
             }
         }
         val itemTouchEditHelper = ItemTouchHelper(swipeEditHandler)
         itemTouchEditHelper.attachToRecyclerView(root.recyclerView)
-
-        //loadBookings()
-
 
         return root
     }
@@ -88,7 +86,7 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>>, 
         root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
-                getAllBookings()
+                getAllBookings(app.auth.currentUser!!.uid)
             }
         })
     }
@@ -97,49 +95,34 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>>, 
         if (root.swiperefresh.isRefreshing) root.swiperefresh.isRefreshing = false
     }
 
-    override fun onFailure(call: Call<List<ValetModel>>, t: Throwable) {
-        info("Retrofit Error : $t.message")
-        serviceUnavailableMessage(activity!!)
-        checkSwipeRefresh()
-        hideLoader(loader)
+    fun deleteUserBooking(userId: String, uid: String?){
+        app.database.child("user-bookings").child(userId).child(uid!!)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot){
+                        snapshot.ref.removeValue()
+                    }
+                    override fun onCancelled(error: DatabaseError){
+                        info("Firebase Booking error : ${error.message}")
+                    }
+                })
     }
 
-    override fun onResponse(call: Call<List<ValetModel>>,
-                            response: Response<List<ValetModel>>
-    ) {
-        serviceAvailableMessage(activity!!)
-        info("Retrofit JSON = ${response.body()}")
-        app.valets = response.body() as ArrayList<ValetModel>
-        root.recyclerView.adapter = ValetingAdapter(app.valets, this)
-        root.recyclerView.adapter?.notifyDataSetChanged()
-        checkSwipeRefresh()
-        hideLoader(loader)
-    }
-
-    fun getAllBookings() {
-        showLoader(loader, "Downloading the Donations List")
-        var callGetAll = app.valetService.getall()
-        callGetAll.enqueue(this)
-    }
-
-    fun deleteBooking(id: String){
-        showLoader(loader, "Deleting Booking $id")
-        val callDelete = app.valetService.delete(app.auth.currentUser?.email, id)
-        callDelete.enqueue(object : Callback<ValetWrapper>{
-            override fun onFailure(call: Call<ValetWrapper>, t: Throwable) {
-                info("Retrofit Error : $t.message")
-                serviceUnavailableMessage(activity!!)
-                hideLoader(loader)
-            }
-
-            override fun onResponse(call: Call<ValetWrapper>, response: Response<ValetWrapper>) {
-                hideLoader(loader)
-            }
-        })
+    fun deleteBooking(uid: String?){
+        app.database.child("bookings").child(uid!!)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot){
+                        snapshot.ref.removeValue()
+                    }
+                    override fun onCancelled(error: DatabaseError){
+                        info("Firebase Booking error : ${error.message}")
+                    }
+                })
     }
 
     override fun onValetClick(valet: ValetModel){
-        activity!!.supportFragmentManager.beginTransaction()
+        requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.homeFrame, EditFragment.newInstance(valet))
             .addToBackStack(null)
             .commit()
@@ -147,6 +130,30 @@ class BookingListFragment : Fragment(), AnkoLogger, Callback<List<ValetModel>>, 
 
     override fun onResume() {
         super.onResume()
-        getAllBookings()
+        getAllBookings(app.auth.currentUser!!.uid)
+    }
+
+    fun getAllBookings(userId: String?){
+        showLoader(loader, "Downloading Bookings from firebase")
+        var bookingsList = ArrayList<ValetModel>()
+        app.database.child("user-bookings").child(userId!!)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError) {
+                    info("Firebase Booking error : ${error.message}")
+                }
+                override fun onDataChange(snapshot: DataSnapshot){
+                    val children = snapshot!!.children
+                    children.forEach{
+                        val booking = it.getValue<ValetModel>(ValetModel::class.java!!)
+                        bookingsList.add(booking!!)
+                        app.valets = bookingsList
+                        root.recyclerView.adapter = ValetingAdapter(app.valets, this@BookingListFragment)
+                        root.recyclerView.adapter?.notifyDataSetChanged()
+                        checkSwipeRefresh()
+                        hideLoader(loader)
+                        app.database.child("user-bookings").child(userId!!).removeEventListener(this)
+                    }
+                }
+            })
     }
 }

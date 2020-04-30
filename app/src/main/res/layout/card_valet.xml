@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="8dp"
-    android:elevation="24dp">
+    android:elevation="0dp">
 
     <RelativeLayout
         android:id="@+id/report_layout"
@@ -50,7 +50,7 @@
             android:textSize="14sp" />
 
         <!--Everything below is taken from section 5 of the networking lab-->
-        <ImageView
+       <!-- <ImageView
             android:id="@+id/imageIcon"
             android:layout_width="64dp"
             android:layout_height="64dp"
@@ -93,7 +93,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="21dp"
             android:layout_toEndOf="@id/paymentmethod"
-            app:srcCompat="@android:drawable/star_big_off" />
+            app:srcCompat="@android:drawable/star_big_off" />-->
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

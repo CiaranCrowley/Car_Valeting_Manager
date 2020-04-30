@@ -1,28 +1,34 @@
 package ie.wit.fragments
 
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import ie.wit.R
-import ie.wit.api.ValetWrapper
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
 import ie.wit.utils.createLoader
 import ie.wit.utils.hideLoader
-import ie.wit.utils.serviceUnavailableMessage
 import ie.wit.utils.showLoader
+import kotlinx.android.synthetic.main.card_valet.view.*
+import kotlinx.android.synthetic.main.fragment_booking.*
+import kotlinx.android.synthetic.main.fragment_booking.view.*
+import kotlinx.android.synthetic.main.fragment_booking.view.showDate
+import kotlinx.android.synthetic.main.fragment_edit.*
 import kotlinx.android.synthetic.main.fragment_edit.view.*
+import kotlinx.android.synthetic.main.fragment_edit.view.editShowDate
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import java.util.*
 
-class EditFragment : Fragment(), Callback<ValetWrapper>, AnkoLogger {
+class EditFragment : Fragment(), AnkoLogger {
 
     lateinit var app: ValetApp
     lateinit var loader : AlertDialog
@@ -45,44 +51,83 @@ class EditFragment : Fragment(), Callback<ValetWrapper>, AnkoLogger {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_edit, container, false)
         activity?.title = getString(R.string.action_edit)
-        loader = createLoader(activity!!)
+        loader = createLoader(requireActivity())
 
-        //todo This is where updating is done.  Make changes to suit my own stuff once firebase is implemented
-        /*root.editAmount.setText(editDonation!!.amount.toString())
-        root.editPaymenttype.setText(editDonation!!.paymenttype)
-        root.editMessage.setText(editDonation!!.message)
-        root.editUpvotes.setText(editDonation!!.upvotes.toString())*/
+        root.editCarBrand.setText(editBooking!!.brand.toString())
+        root.editCarModel.setText(editBooking!!.model.toString())
+        root.editNumberPlate.setText(editBooking!!.numberPlate.toString())
 
-        root.editUpdateButton.setOnClickListener {
+        setButtonListener(root)
+
+        root.editShowDate.setText(editBooking!!.date.toString())
+
+        root.editBtnAddCar.setOnClickListener {
             showLoader(loader, "Updating Donation on Server...")
             updateBookingData()
-            var callUpdate = app.valetService.put(app.auth.currentUser?.email,
-                (editBooking as ValetModel)._id ,editBooking as ValetModel)
-            callUpdate.enqueue(this)
+            updateBooking(editBooking!!.uid, editBooking!!)
+            updateUserBooking(app.auth.currentUser!!.uid,
+                editBooking!!.uid, editBooking!!)
         }
 
         return root
     }
 
-    override fun onFailure(call: Call<ValetWrapper>, t: Throwable) {
-        info("Retrofit Error : $t.message")
-        serviceUnavailableMessage(activity!!)
-        hideLoader(loader)
-    }
+    fun setButtonListener(layout: View){
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
 
-    override fun onResponse(call: Call<ValetWrapper>, response: Response<ValetWrapper>) {
-        hideLoader(loader)
-        activity!!.supportFragmentManager.beginTransaction()
-            .replace(R.id.homeFrame, BookingListFragment.newInstance())
-            .addToBackStack(null)
-            .commit()
+        val dpd = DatePickerDialog(this.requireActivity(), DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+
+            // Display Selected date in textbox
+            editShowDate.text = "$dayOfMonth/$monthOfYear/$year"
+        }, year, month, day)
+
+        layout.editBtnGoCalendar.setOnClickListener{
+            dpd.show()
+        }
     }
 
     fun updateBookingData(){
-        //todo change the obvious parts of this
-       /* editDonation!!.amount = root.editAmount.text.toString().toInt()
-        editDonation!!.message = root.editMessage.text.toString()
-        editDonation!!.upvotes = root.editUpvotes.text.toString().toInt()*/
+        editBooking!!.brand = root.editCarBrand.text.toString()
+        editBooking!!.model = root.editCarModel.text.toString()
+        editBooking!!.numberPlate = root.editNumberPlate.text.toString()
+        editBooking!!.date = root.editShowDate.text.toString()
+    }
+
+    fun updateUserBooking(userId: String, uid: String?, booking: ValetModel){
+        app.database.child("user-bookings").child(userId).child(uid!!)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.setValue(booking)
+                        activity!!.supportFragmentManager.beginTransaction()
+                            .replace(R.id.homeFrame, BookingListFragment.newInstance())
+                            .addToBackStack(null)
+                            .commit()
+                        hideLoader(loader)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        info("Firebase Booking error : ${error.message}")
+                    }
+                })
+    }
+
+    fun updateBooking(uid: String?, booking: ValetModel){
+        app.database.child("bookings").child(uid!!)
+            .addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.ref.setValue(booking)
+                        hideLoader(loader)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        info("Firebase Booking error : ${error.message}")
+                    }
+                })
     }
 
 
