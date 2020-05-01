@@ -1,5 +1,6 @@
 package ie.wit.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,11 +10,15 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import ie.wit.R
 import ie.wit.fragments.BookingFragment
 import ie.wit.fragments.BookingListFragment
+import ie.wit.fragments.ListAllFragment
 import ie.wit.main.ValetApp
+import ie.wit.utils.*
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
@@ -43,6 +48,23 @@ class MainActivity : AppCompatActivity(),
         toggle.syncState()
 
         navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.email
+        //Checking if Google User, upload google profile pic
+        checkExistingPhoto(app,this)
+
+
+        /*Picasso.get().load(app.auth.currentUser?.photoUrl)
+            .resize(180, 180)
+            .transform(CropCircleTransformation())
+            .into(navView.getHeaderView(0).imageView, object : Callback {
+                override fun onSuccess() {
+                    // Drawable is ready
+                    uploadImageView(app,navView.getHeaderView(0).imageView)
+                }
+                override fun onError(e: Exception) {}
+            })*/
+
+        navView.getHeaderView(0).imageView
+            .setOnClickListener { showImagePicker(this,1) }
 
         ft = supportFragmentManager.beginTransaction()
 
@@ -56,6 +78,7 @@ class MainActivity : AppCompatActivity(),
         when (item.itemId) {
             R.id.nav_createBooking -> navigateTo(BookingFragment.newInstance())
             R.id.nav_bookingList -> navigateTo(BookingListFragment.newInstance())
+            R.id.nav_list_all -> navigateTo(ListAllFragment.newInstance())
             R.id.nav_sign_out -> signOut()
 
             else -> toast("You Selected Something Else")
@@ -83,10 +106,30 @@ class MainActivity : AppCompatActivity(),
             .commit()
     }
 
-    private fun signOut()
-    {
+    private fun signOut() {
         app.auth.signOut()
         startActivity<Login>()
         finish()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            1 -> {
+                if (data != null) {
+                    writeImageRef(app,readImageUri(resultCode, data).toString())
+                    Picasso.get().load(readImageUri(resultCode, data).toString())
+                        .resize(180, 180)
+                        .transform(CropCircleTransformation())
+                        .into(navView.getHeaderView(0).imageView, object : Callback {
+                            override fun onSuccess() {
+                                // Drawable is ready
+                                uploadImageView(app,navView.getHeaderView(0).imageView)
+                            }
+                            override fun onError(e: Exception) {}
+                        })
+                }
+            }
+        }
     }
 }

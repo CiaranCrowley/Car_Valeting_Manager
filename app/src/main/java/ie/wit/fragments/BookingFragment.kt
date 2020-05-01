@@ -54,7 +54,7 @@ class BookingFragment : Fragment(), AnkoLogger {
 
         val dpd = DatePickerDialog(this.requireActivity(), DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
 
-            // Display Selected date in textbox
+            // Display Selected date in text box
             showDate.text = "$dayOfMonth/$monthOfYear/$year"
         }, year, month, day)
 
@@ -75,7 +75,12 @@ class BookingFragment : Fragment(), AnkoLogger {
                 if (edit) {
                     //app.valets.update(valet.copy())
                 } else {
-                    writeNewBooking(ValetModel(brand = brand, model = model, numberPlate = plate, date = date, email = app.auth.currentUser?.email))
+                    writeNewBooking(ValetModel(brand = brand,
+                        model = model,
+                        numberPlate = plate,
+                        date = date,
+                        profilepic = app.userImage.toString(),
+                        email = app.auth.currentUser?.email))
                 }
             }
         }
@@ -90,7 +95,7 @@ class BookingFragment : Fragment(), AnkoLogger {
     }
 
     fun writeNewBooking(booking: ValetModel){
-        // Create new donation at /donations & /donations/$uid
+        // Create new booking at /bookings & /bookings/$uid
         showLoader(loader, "Adding booking to Firebase")
         info("Firebase DB reference : ${app.database}")
         val uid = app.auth.currentUser!!.uid

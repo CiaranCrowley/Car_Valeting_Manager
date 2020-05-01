@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.fragment_booking_list.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
-class BookingListFragment : Fragment(), AnkoLogger, ValetingListener {
+open class BookingListFragment : Fragment(), AnkoLogger, ValetingListener {
 
     lateinit var app: ValetApp
     lateinit var loader: AlertDialog
@@ -46,8 +46,8 @@ class BookingListFragment : Fragment(), AnkoLogger, ValetingListener {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_booking_list, container, false)
 
-        root.recyclerView.layoutManager = LinearLayoutManager(activity)
-        root.recyclerView.adapter = ValetingAdapter(app.valets, this)
+        root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
+        //root.recyclerView.adapter = ValetingAdapter(app.valets, this)
         loader = createLoader(requireActivity())
         setSwipeRefresh()
 
@@ -82,7 +82,7 @@ class BookingListFragment : Fragment(), AnkoLogger, ValetingListener {
             }
     }
 
-    fun setSwipeRefresh() {
+    open fun setSwipeRefresh() {
         root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
@@ -130,10 +130,12 @@ class BookingListFragment : Fragment(), AnkoLogger, ValetingListener {
 
     override fun onResume() {
         super.onResume()
-        getAllBookings(app.auth.currentUser!!.uid)
+        if(this::class == BookingListFragment::class)
+            getAllBookings(app.auth.currentUser!!.uid)
     }
 
     fun getAllBookings(userId: String?){
+        loader = createLoader(activity!!)
         showLoader(loader, "Downloading Bookings from firebase")
         var bookingsList = ArrayList<ValetModel>()
         app.database.child("user-bookings").child(userId!!)
@@ -141,17 +143,22 @@ class BookingListFragment : Fragment(), AnkoLogger, ValetingListener {
                 override fun onCancelled(error: DatabaseError) {
                     info("Firebase Booking error : ${error.message}")
                 }
+
                 override fun onDataChange(snapshot: DataSnapshot){
-                    val children = snapshot!!.children
+                    hideLoader(loader)
+                    val children = snapshot.children
                     children.forEach{
-                        val booking = it.getValue<ValetModel>(ValetModel::class.java!!)
+                        val booking = it
+                            .getValue<ValetModel>(ValetModel::class.java!!)
+
                         bookingsList.add(booking!!)
-                        app.valets = bookingsList
-                        root.recyclerView.adapter = ValetingAdapter(app.valets, this@BookingListFragment)
+                        root.recyclerView.adapter =
+                            ValetingAdapter(bookingsList, this@BookingListFragment, false)
                         root.recyclerView.adapter?.notifyDataSetChanged()
                         checkSwipeRefresh()
-                        hideLoader(loader)
-                        app.database.child("user-bookings").child(userId!!).removeEventListener(this)
+
+                        app.database.child("user-bookings").child(userId)
+                            .removeEventListener(this)
                     }
                 }
             })

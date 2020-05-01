@@ -40,7 +40,7 @@ class EditFragment : Fragment(), AnkoLogger {
         app = activity?.application as ValetApp
 
         arguments?.let {
-            editBooking = it.getParcelable("editdonation")
+            editBooking = it.getParcelable("editBooking")
         }
     }
 
@@ -62,7 +62,7 @@ class EditFragment : Fragment(), AnkoLogger {
         root.editShowDate.setText(editBooking!!.date.toString())
 
         root.editBtnAddCar.setOnClickListener {
-            showLoader(loader, "Updating Donation on Server...")
+            showLoader(loader, "Updating Booking on Server...")
             updateBookingData()
             updateBooking(editBooking!!.uid, editBooking!!)
             updateUserBooking(app.auth.currentUser!!.uid,
@@ -133,10 +133,10 @@ class EditFragment : Fragment(), AnkoLogger {
 
     companion object {
         @JvmStatic
-        fun newInstance(donation: ValetModel) =
+        fun newInstance(booking: ValetModel) =
             EditFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable("editdonation",donation)
+                    putParcelable("editBooking",booking)
                 }
             }
     }

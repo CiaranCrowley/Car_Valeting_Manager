@@ -11,6 +11,7 @@ data class ValetModel(
     var model: String = "N/A",
     var numberPlate: String = "N/A",
     var date: String = "N/A",
+    var profilepic: String = "",
     var email: String? = "joe@bloggs.com") : Parcelable
 {
     @Exclude
@@ -21,6 +22,7 @@ data class ValetModel(
             "model" to model,
             "numberPlate" to numberPlate,
             "date" to date,
+            "profilepic" to profilepic,
             "email" to email
         )
     }
