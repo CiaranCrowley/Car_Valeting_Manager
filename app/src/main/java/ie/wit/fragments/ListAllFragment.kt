@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import ie.wit.R
 import ie.wit.adapters.ValetingAdapter
@@ -17,7 +19,7 @@ import ie.wit.utils.*
 import kotlinx.android.synthetic.main.fragment_booking_list.view.*
 import org.jetbrains.anko.info
 
-class ListAllFragment : BookingListFragment(),
+/*class ListAllFragment : BookingListFragment(),
     ValetingListener {
 
     override fun onCreateView(
@@ -46,17 +48,17 @@ class ListAllFragment : BookingListFragment(),
         root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
-                getAllUsersDonations()
+                getAllUsersBookings()
             }
         })
     }
 
     override fun onResume() {
         super.onResume()
-        getAllUsersDonations()
+        getAllUsersBookings()
     }
 
-    fun getAllUsersDonations() {
+    fun getAllUsersBookings() {
         loader = createLoader(activity!!)
         showLoader(loader, "Downloading All Users Bookings from Firebase")
         val bookingsList = ArrayList<ValetModel>()
@@ -83,5 +85,40 @@ class ListAllFragment : BookingListFragment(),
                     }
                 }
             })
+    }
+}*/
+
+class ListAllFragment : BookingListFragment(),
+    ValetingListener {
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        root = inflater.inflate(R.layout.fragment_booking_list, container, false)
+        activity?.title = getString(R.string.menu_report_all)
+
+        root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
+
+        var query = FirebaseDatabase.getInstance()
+            .reference.child("bookings")
+
+        var options = FirebaseRecyclerOptions.Builder<ValetModel>()
+            .setQuery(query, ValetModel::class.java)
+            .setLifecycleOwner(this)
+            .build()
+
+        root.recyclerView.adapter = ValetingAdapter(options, this)
+
+        return root
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            ListAllFragment().apply {
+                arguments = Bundle().apply { }
+            }
     }
 }

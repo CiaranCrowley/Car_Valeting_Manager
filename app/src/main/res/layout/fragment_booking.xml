@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.wit.fragments.BookingFragment">
+    tools:context="ie.wit.fragments.BookingFragment"
+    android:background="@drawable/book_frag_background">
 
     <TextView
         android:id="@+id/addNewAppointment"
@@ -13,10 +14,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="false"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="20dp"
         android:text="@string/addNewAppointment"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorNavBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +32,9 @@
         android:hint="@string/carBrand"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addNewAppointment">
+        app:layout_constraintTop_toBottomOf="@+id/addNewAppointment"
+        android:textColor="@color/colorNavBar"
+        android:textColorHint="@color/colorNavBar">
     </com.google.android.material.textfield.TextInputEditText>
 
     <com.google.android.material.textfield.TextInputEditText
@@ -44,7 +48,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/carBrand">
+        app:layout_constraintTop_toBottomOf="@id/carBrand"
+        android:textColor="@color/colorNavBar"
+        android:textColorHint="@color/colorNavBar">
     </com.google.android.material.textfield.TextInputEditText>
 
     <com.google.android.material.textfield.TextInputEditText
@@ -58,20 +64,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carModel" />
+        app:layout_constraintTop_toBottomOf="@+id/carModel"
+        android:textColor="@color/colorNavBar"
+        android:textColorHint="@color/colorNavBar"/>
+
+    <ImageView
+        android:id="@+id/imageFavourite"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/star_big_off" />
 
     <Button
         android:id="@+id/btnGoCalendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
         android:text="@string/go_to_calendar"
         android:textAllCaps="false"
+        android:textColor="@color/colorNavBar"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/numberPlate" />
 
@@ -85,7 +105,9 @@
         android:hint="@string/date"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btnGoCalendar" />
+        app:layout_constraintTop_toTopOf="@id/btnGoCalendar"
+        android:textColor="@color/colorNavBar"
+        android:textColorHint="@color/colorNavBar"/>
 
     <Button
         android:id="@+id/btnAddCar"
@@ -99,6 +121,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showDate" />
+        app:layout_constraintTop_toBottomOf="@+id/showDate"
+        android:textColor="@color/colorNavBar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

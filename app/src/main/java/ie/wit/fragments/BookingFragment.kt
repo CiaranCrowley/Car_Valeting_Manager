@@ -12,6 +12,7 @@ import ie.wit.R
 import ie.wit.main.ValetApp
 import ie.wit.models.ValetModel
 import ie.wit.utils.*
+import kotlinx.android.synthetic.main.card_valet.view.*
 import kotlinx.android.synthetic.main.fragment_booking.*
 import kotlinx.android.synthetic.main.fragment_booking.view.*
 import org.jetbrains.anko.AnkoLogger
@@ -24,6 +25,7 @@ class BookingFragment : Fragment(), AnkoLogger {
 
     var valet = ValetModel()
     var edit = false
+    var favourite = false
     lateinit var app: ValetApp
     lateinit var loader : AlertDialog
 
@@ -42,6 +44,7 @@ class BookingFragment : Fragment(), AnkoLogger {
         activity?.title = getString(R.string.action_book)
 
         setButtonListener(root)
+        setFavouriteListener(root)
         return root
     }
 
@@ -80,10 +83,28 @@ class BookingFragment : Fragment(), AnkoLogger {
                         numberPlate = plate,
                         date = date,
                         profilepic = app.userImage.toString(),
-                        email = app.auth.currentUser?.email))
+                        isfavourite = favourite,
+                        latitude = app.currentLocation.latitude,
+                        longitude = app.currentLocation.longitude,
+                        email = app.currentUser?.email))
                 }
             }
         }
+    }
+
+    fun setFavouriteListener (layout: View) {
+        layout.imageFavourite.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                if (!favourite) {
+                    layout.imageFavourite.setImageResource(android.R.drawable.star_big_on)
+                    favourite = true
+                }
+                else {
+                    layout.imageFavourite.setImageResource(android.R.drawable.star_big_off)
+                    favourite = false
+                }
+            }
+        })
     }
 
     companion object {
@@ -98,7 +119,7 @@ class BookingFragment : Fragment(), AnkoLogger {
         // Create new booking at /bookings & /bookings/$uid
         showLoader(loader, "Adding booking to Firebase")
         info("Firebase DB reference : ${app.database}")
-        val uid = app.auth.currentUser!!.uid
+        val uid = app.currentUser!!.uid
         val key = app.database.child("bookings").push().key
         if(key == null){
             info("Firebase Error : Key Empty")

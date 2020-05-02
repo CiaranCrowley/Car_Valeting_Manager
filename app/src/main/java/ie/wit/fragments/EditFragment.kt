@@ -65,7 +65,7 @@ class EditFragment : Fragment(), AnkoLogger {
             showLoader(loader, "Updating Booking on Server...")
             updateBookingData()
             updateBooking(editBooking!!.uid, editBooking!!)
-            updateUserBooking(app.auth.currentUser!!.uid,
+            updateUserBooking(app.currentUser!!.uid,
                 editBooking!!.uid, editBooking!!)
         }
 

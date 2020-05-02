@@ -14,3 +14,4 @@
 .externalNativeBuild
 .cxx
 /app/google-services.json
+key.xml

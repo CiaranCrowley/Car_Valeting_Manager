@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.wit.fragments.BookingListFragment">
+    tools:context="ie.wit.fragments.BookingListFragment"
+    android:background="@drawable/list_frag_back">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMain"

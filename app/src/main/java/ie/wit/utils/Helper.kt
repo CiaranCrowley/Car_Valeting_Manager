@@ -67,7 +67,7 @@ fun convertImageToBytes(imageView: ImageView) : ByteArray {
 }
 
 fun uploadImageView(app: ValetApp, imageView: ImageView) {
-    val uid = app.auth.currentUser!!.uid
+    val uid = app.currentUser!!.uid
     val imageRef = app.storage.child("photos").child("${uid}.jpg")
     val uploadTask = imageRef.putBytes(convertImageToBytes(imageView))
 
@@ -82,7 +82,7 @@ fun uploadImageView(app: ValetApp, imageView: ImageView) {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 app.userImage = task.result!!.toString().toUri()
-                updateAllDonations(app)
+                updateAllBookings(app)
                 writeImageRef(app,app.userImage.toString())
                 Picasso.get().load(app.userImage)
                     .resize(180, 180)
@@ -114,7 +114,7 @@ fun readImageUri(resultCode: Int, data: Intent?): Uri? {
 }
 
 fun writeImageRef(app: ValetApp, imageRef: String) {
-    val userId = app.auth.currentUser!!.uid
+    val userId = app.currentUser!!.uid
     val values = UserPhotoModel(userId,imageRef).toMap()
     val childUpdates = HashMap<String, Any>()
 
@@ -122,9 +122,9 @@ fun writeImageRef(app: ValetApp, imageRef: String) {
     app.database.updateChildren(childUpdates)
 }
 
-fun updateAllDonations(app: ValetApp) {
-    val userId = app.auth.currentUser!!.uid
-    val userEmail = app.auth.currentUser!!.email
+fun updateAllBookings(app: ValetApp) {
+    val userId = app.currentUser!!.uid
+    val userEmail = app.currentUser!!.email
     var bookingRef = app.database.ref.child("bookings")
         .orderByChild("email")
     val userBookingRef = app.database.ref.child("user-bookings")
@@ -159,18 +159,18 @@ fun validatePhoto(app: ValetApp, activity: Activity) {
 
     var imageUri: Uri? = null
     val imageExists = app.userImage.toString().length > 0
-    val googlePhotoExists = app.auth.currentUser?.photoUrl != null
+    val googlePhotoExists = app.currentUser?.photoUrl != null
 
     if(imageExists)
         imageUri = app.userImage
     else
         if (googlePhotoExists)
-            imageUri = app.auth.currentUser?.photoUrl!!
+            imageUri = app.currentUser?.photoUrl!!
 
     if (googlePhotoExists || imageExists) {
-        if(!app.auth.currentUser?.displayName.isNullOrEmpty())
+        if(!app.currentUser?.displayName.isNullOrEmpty())
             activity.navView.getHeaderView(0)
-                .nav_header_name.text = app.auth.currentUser?.displayName
+                .nav_header_name.text = app.currentUser?.displayName
         else
             activity.navView.getHeaderView(0)
                 .nav_header_name.text = activity.getText(R.string.nav_header_title)
@@ -198,7 +198,7 @@ fun checkExistingPhoto(app: ValetApp,activity: Activity) {
     app.userImage = "".toUri()
 
     app.database.child("user-photos").orderByChild("uid")
-        .equalTo(app.auth.currentUser!!.uid)
+        .equalTo(app.currentUser!!.uid)
         .addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot ) {
