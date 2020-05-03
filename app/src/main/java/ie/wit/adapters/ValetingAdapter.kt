@@ -101,7 +101,7 @@ class ValetingAdapter(options: FirebaseRecyclerOptions<ValetModel>,
                         .into(itemView.imageIcon)
                 }
                 else
-                    itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_darth_maul_foreground)
+                    itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_darthvadar)
 
             }
         }

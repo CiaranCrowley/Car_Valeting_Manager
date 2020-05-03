@@ -35,7 +35,7 @@ fun checkLocationPermissions(activity: Activity) : Boolean {
 }
 
 fun isPermissionGranted(code: Int, grantResults: IntArray): Boolean {
-    var permissionGranted = false;
+    var permissionGranted = false
     if (code == REQUEST_PERMISSIONS_REQUEST_CODE) {
         when {
             grantResults.isEmpty() -> Log.i("Location", "User interaction was cancelled.")
@@ -145,10 +145,10 @@ fun addMapMarkers(dl : ArrayList<ValetModel>, map: GoogleMap) {
     dl.forEach {
         map.addMarker(
             MarkerOptions().position(LatLng(it.latitude, it.longitude))
-                .title("${it.brand} €${it.model}")
+                .title("${it.brand} ${it.model}")
                 .snippet(it.date)
                 .icon(
-                    BitmapDescriptorFactory.fromResource(R.mipmap.darth_maul_map))
+                    BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_vadar_foreground))
         )
     }
 }

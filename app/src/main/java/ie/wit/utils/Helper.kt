@@ -188,7 +188,7 @@ fun validatePhoto(app: ValetApp, activity: Activity) {
     }
     else    // New Regular User, upload default pic of homer
     {
-        activity.navView.getHeaderView(0).imageView.setImageResource(R.mipmap.ic_launcher_darth_maul_round)
+        activity.navView.getHeaderView(0).imageView.setImageResource(R.mipmap.ic_launcher_vadar_round)
         uploadImageView(app, activity.navView.getHeaderView(0).imageView)
     }
 }
